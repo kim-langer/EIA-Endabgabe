@@ -9,6 +9,7 @@ keine Zusammenarbeit(en)
 var finaltask;
 (function (finaltask) {
     window.addEventListener("load", handleLoad);
+    let editbutton;
     let canvas;
     let backgroundCanvas;
     let backgroundContext;
@@ -21,13 +22,31 @@ var finaltask;
         backgroundCanvas.height = canvas.height;
         backgroundContext = backgroundCanvas.getContext("2d");
         drawBackground(backgroundContext);
+        drawicecreamdealer(backgroundContext, { x: 400, y: 200 }, { x: 200, y: 280 });
         drawicecreamcounter(backgroundContext);
         drawstandingDesk(backgroundContext, { x: 900, y: 280 }, 50);
         drawstandingDesk(backgroundContext, { x: 940, y: 600 }, 50);
         drawstandingDesk(backgroundContext, { x: 670, y: 600 }, 50);
         drawstandingDesk(backgroundContext, { x: 300, y: 640 }, 50);
+        createEditButton();
+        drawEarnings();
     }
     ;
+    // Die Buttons auf dem Canvas
+    function createEditButton() {
+        editbutton = document.createElement("button");
+        editbutton.innerHTML = "Edit your ice cream counter";
+        editbutton.style.position = "absolute";
+        editbutton.style.left = canvas.offsetLeft + 280 + "px";
+        editbutton.style.top = canvas.offsetTop + 280 + "px";
+        document.body.appendChild(editbutton);
+    }
+    // Funktionen für das Berechnen und Anzeigen der Einnahmen
+    function drawEarnings() {
+        finaltask.crc2.fillStyle = "black";
+        finaltask.crc2.font = "bold 16px Arial";
+        finaltask.crc2.fillText("Your Earnings:", 20, 40); // Position des Textes anpassen --> + earnings.toFixed(2) + " €", 10, 20)
+    }
     // Hintergrundfarbe zeichnen
     function drawBackground(crc2) {
         crc2.fillStyle = "#E8DCCA";
@@ -54,31 +73,34 @@ var finaltask;
         crc2.stroke();
     }
     ;
-    function drawicecreamdealer() {
-        finaltask.crc2.save();
-        finaltask.crc2.translate(this.position.x, this.position.y);
-        // Körper
-        finaltask.crc2.beginPath();
-        finaltask.crc2.arc(0, 0, this.size.x / 4, 0, 2 * Math.PI);
-        finaltask.crc2.fillStyle = "brown";
-        finaltask.crc2.fill();
-        finaltask.crc2.closePath();
-        // Kopf
-        finaltask.crc2.beginPath();
-        finaltask.crc2.arc(0, -this.size.x / 4, this.size.x / 8, 0, 2 * Math.PI);
-        finaltask.crc2.fillStyle = "bisque";
-        finaltask.crc2.fill();
-        finaltask.crc2.closePath();
-        finaltask.crc2.restore();
-    }
-    function drawstandingDesk(crc2, position, radius) {
+    // Eisdealer/User zeichnen (nur zur Veranschauung da, keine Interaktion möglich)
+    function drawicecreamdealer(crc2, position, size) {
         crc2.save();
+        crc2.translate(position.x, position.y);
+        // Körper
         crc2.beginPath();
-        crc2.arc(position.x, position.y, radius, 0, 2 * Math.PI);
-        crc2.fillStyle = "brown"; // Braune Füllung
+        crc2.arc(0, 0, size.x / 4, 0, 2 * Math.PI);
+        crc2.fillStyle = "blue";
+        crc2.fill();
+        crc2.closePath();
+        // Kopf
+        crc2.beginPath();
+        crc2.arc(0, -size.x / 4, size.x / 8, 0, 2 * Math.PI);
+        crc2.fillStyle = "#D9BB9B";
         crc2.fill();
         crc2.closePath();
         crc2.restore();
     }
+    ;
+    function drawstandingDesk(crc2, position, radius) {
+        crc2.save();
+        crc2.beginPath();
+        crc2.arc(position.x, position.y, radius, 0, 2 * Math.PI);
+        crc2.fillStyle = "#79553C";
+        crc2.fill();
+        crc2.closePath();
+        crc2.restore();
+    }
+    ;
 })(finaltask || (finaltask = {}));
 //# sourceMappingURL=Main.js.map

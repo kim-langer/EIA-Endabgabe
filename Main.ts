@@ -14,12 +14,15 @@ namespace finaltask {
     interface Vector {
         x: number;
         y: number;
-      }
+    }
+
+    let editbutton: HTMLButtonElement;
 
     export let crc2: CanvasRenderingContext2D;
     let canvas: HTMLCanvasElement;
     let backgroundCanvas: HTMLCanvasElement;
     let backgroundContext: CanvasRenderingContext2D;
+
 
     function handleLoad(_event: Event): void {
 
@@ -32,14 +35,36 @@ namespace finaltask {
         backgroundContext = backgroundCanvas.getContext("2d");
 
         drawBackground(backgroundContext);
+        drawicecreamdealer(backgroundContext, { x: 400, y: 200 }, { x: 200, y: 280 });
         drawicecreamcounter(backgroundContext);
-        drawstandingDesk(backgroundContext,  { x: 900, y: 280 }, 50)
-        drawstandingDesk(backgroundContext,  { x: 940, y: 600 }, 50)
-        drawstandingDesk(backgroundContext,  { x: 670, y: 600 }, 50)
-        drawstandingDesk(backgroundContext,  { x: 300, y: 640 }, 50)
+        drawstandingDesk(backgroundContext, { x: 900, y: 280 }, 50)
+        drawstandingDesk(backgroundContext, { x: 940, y: 600 }, 50)
+        drawstandingDesk(backgroundContext, { x: 670, y: 600 }, 50)
+        drawstandingDesk(backgroundContext, { x: 300, y: 640 }, 50)
 
+        createEditButton();
+        drawEarnings();
 
     };
+
+
+    // Die Buttons auf dem Canvas
+    function createEditButton(): void {
+        editbutton = document.createElement("button");
+        editbutton.innerHTML = "Edit your ice cream counter";
+        editbutton.style.position = "absolute";
+        editbutton.style.left = canvas.offsetLeft + 280 + "px";
+        editbutton.style.top = canvas.offsetTop + 280 + "px";
+
+        document.body.appendChild(editbutton);
+    }
+
+    // Funktionen für das Berechnen und Anzeigen der Einnahmen
+    function drawEarnings(): void {
+        crc2.fillStyle = "black";
+        crc2.font = "bold 16px Arial";
+        crc2.fillText("Your Earnings:", 20, 40); // Position des Textes anpassen --> + earnings.toFixed(2) + " €", 10, 20)
+      }
 
     // Hintergrundfarbe zeichnen
     function drawBackground(crc2: CanvasRenderingContext2D): void {
@@ -55,10 +80,10 @@ namespace finaltask {
         crc2.lineWidth = 0.5;
 
         let x = 170;
-        let y = 230; 
-        let width = 500; 
-        let height = 200; 
-        let cornerRadius = 10; 
+        let y = 230;
+        let width = 500;
+        let height = 200;
+        let cornerRadius = 10;
 
         crc2.beginPath();
         crc2.moveTo(x + cornerRadius, y);
@@ -69,42 +94,42 @@ namespace finaltask {
         crc2.closePath();
 
         crc2.fill();
-        crc2.stroke(); 
+        crc2.stroke();
 
     };
 
-
-    function drawicecreamdealer() {
+    // Eisdealer/User zeichnen (nur zur Veranschauung da, keine Interaktion möglich)
+    function drawicecreamdealer(crc2: CanvasRenderingContext2D, position: Vector, size: Vector) {
         crc2.save();
-        crc2.translate(this.position.x, this.position.y);
+        crc2.translate(position.x, position.y);
 
         // Körper
         crc2.beginPath();
-        crc2.arc(0, 0, this.size.x / 4, 0, 2 * Math.PI);
-        crc2.fillStyle = "brown";
+        crc2.arc(0, 0, size.x / 4, 0, 2 * Math.PI);
+        crc2.fillStyle = "blue";
         crc2.fill();
         crc2.closePath();
 
         // Kopf
         crc2.beginPath();
-        crc2.arc(0, -this.size.x / 4, this.size.x / 8, 0, 2 * Math.PI);
-        crc2.fillStyle = "bisque";
+        crc2.arc(0, -size.x / 4, size.x / 8, 0, 2 * Math.PI);
+        crc2.fillStyle = "#D9BB9B";
         crc2.fill();
         crc2.closePath();
 
         crc2.restore();
-    }
+    };
 
     function drawstandingDesk(crc2: CanvasRenderingContext2D, position: Vector, radius: number): void {
         crc2.save();
-      
+
         crc2.beginPath();
         crc2.arc(position.x, position.y, radius, 0, 2 * Math.PI);
-        crc2.fillStyle = "brown"; // Braune Füllung
+        crc2.fillStyle = "#79553C";
         crc2.fill();
         crc2.closePath();
-      
+
         crc2.restore();
-      }
+    };
 
 }
