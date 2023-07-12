@@ -1,14 +1,25 @@
 var finaltask;
 (function (finaltask) {
-    class Eissorte {
+    class IceCream {
         name;
         preis;
-        constructor(name, preis) {
+        color;
+        constructor(name, preis, color) {
             this.name = name;
             this.preis = preis;
+            this.color = color;
         }
+        drawicecream() { }
+        ;
     }
-    class Topping extends Eissorte {
+    finaltask.IceCream = IceCream;
+    class Topping extends IceCream {
+        constructor(name, preis, color) {
+            super(name, preis, color);
+        }
+        drawtopping() { }
+        ;
     }
+    finaltask.Topping = Topping;
 })(finaltask || (finaltask = {}));
 //# sourceMappingURL=icecream.js.map

@@ -1,7 +1,7 @@
 /*Aufgabe: Abschlussarbeit Eisdealer
 Name: Kim Langer
 Matrikelnummer: 272232
-Quellen: -
+Quellen: W3 Schools, ChatGPT, bisherige Aufgaben EIA2
 
 Anmerkungen:
 keine Zusammenarbeit(en)
@@ -29,15 +29,17 @@ var finaltask;
         drawstandingDesk(backgroundContext, { x: 940, y: 600 }, 50);
         drawstandingDesk(backgroundContext, { x: 670, y: 600 }, 50);
         drawstandingDesk(backgroundContext, { x: 300, y: 640 }, 50);
+        drawSmiley(backgroundContext, { x: 1170, y: 100 }, 30);
         createEditButton();
         createStartButton();
         drawEarnings();
     }
     ;
-    // Die Buttons auf dem Canvas
+    let eissorten = []; // Array zur Speicherung der Eissorten
+    // Der "Add a new Ice Cream Button"
     function createEditButton() {
         editbutton = document.createElement("button");
-        editbutton.innerHTML = "View your ice cream counter";
+        editbutton.innerHTML = "Add a new ice cream";
         editbutton.id = "edit-button";
         document.body.appendChild(editbutton);
         editbutton.addEventListener("click", handleEditButtonClick);
@@ -48,7 +50,56 @@ var finaltask;
         event.preventDefault();
         editContainer = document.getElementById("edit-container");
         editContainer.classList.add("visible");
+        let InputHtml = `
+        <div class="input-container">
+          <label for="text-input">New flavor:</label>
+          <input type="text" id="text-input" placeholder="Name your new flavor">
+          <label for="price-input">Price:</label>
+          <input type="number" id="price-input" placeholder="What should it cost?">
+          <label for="color-input">Choose a color</label>
+          <input type="color" id="color-input">
+          <label for="type-input">Flavor or Topping?</label>
+          <select id="type-input">
+            <option value="flavor">Flavor</option>
+            <option value="topping">Topping</option>
+          </select>
+          <button id="addbutton" type="submit">Add</button>
+        </div>
+      `;
+        editContainer.innerHTML = InputHtml;
     }
+    // Neues Eisangebot hinzufügen und speichern
+    function handleFormSubmit(event) {
+        event.preventDefault();
+        // Formulardaten abrufen
+        let nameInput = document.getElementById("text-input");
+        let priceInput = document.getElementById("price-input");
+        let colorInput = document.getElementById("color-input");
+        let typeInput = document.getElementById("type-input");
+        // Neue Eissorte oder neues Topping erstellen
+        const name = nameInput.value;
+        const preis = parseFloat(priceInput.value);
+        const color = colorInput.value;
+        const isFlavour = typeInput.value === "flavor";
+        if (isFlavour) {
+            let eissorte = new finaltask.IceCream(name, preis, color);
+            eissorten.push(eissorte);
+        }
+        else {
+            let topping = new finaltask.Topping(name, preis, color);
+            eissorten.push(topping);
+        }
+        // Formular zurücksetzen
+        nameInput.value = "";
+        priceInput.value = "";
+        colorInput.value = "";
+        typeInput.value = "flavor";
+        editContainer.classList.remove("visible");
+        console.log(eissorten); // Ausgabe der gespeicherten Eissorten im Array
+    }
+    // Event-Listener für das Formular-Submit-Ereignis
+    let addbutton = document.getElementById("addbutton");
+    addbutton.addEventListener("submit", handleFormSubmit);
     function createStartButton() {
         startbutton = document.createElement("button");
         startbutton.innerHTML = "Open the ice cafe for visitors";
@@ -116,5 +167,34 @@ var finaltask;
         crc2.restore();
     }
     ;
+    function drawSmiley(crc2, position, radius) {
+        // Gesicht
+        crc2.beginPath();
+        crc2.arc(position.x, position.y, radius, 0, 2 * Math.PI);
+        crc2.fillStyle = "lightgreen";
+        crc2.fill();
+        crc2.strokeStyle = "black";
+        crc2.lineWidth = 1;
+        crc2.stroke();
+        crc2.closePath();
+        // Augen
+        crc2.beginPath();
+        crc2.arc(position.x - radius / 3, position.y - radius / 6, radius / 8, 0, 2 * Math.PI);
+        crc2.fillStyle = "black";
+        crc2.fill();
+        crc2.closePath();
+        crc2.beginPath();
+        crc2.arc(position.x + radius / 3, position.y - radius / 6, radius / 8, 0, 2 * Math.PI);
+        crc2.fillStyle = "black";
+        crc2.fill();
+        crc2.closePath();
+        // Mund
+        crc2.beginPath();
+        crc2.arc(position.x, position.y + radius / 6, radius / 3, 0.2 * Math.PI, 0.8 * Math.PI);
+        crc2.strokeStyle = "black";
+        crc2.lineWidth = 3;
+        crc2.stroke();
+        crc2.closePath();
+    }
 })(finaltask || (finaltask = {}));
 //# sourceMappingURL=Main.js.map
