@@ -3,3 +3,70 @@ canvas {
     top: 0px;
     left: 0px;
 }
+
+#overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+}
+
+#edit-button {
+    position: absolute;
+    left: 230px;
+    top: 280px;
+    padding: 30px 40px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    background-color: #ffc107;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#edit-button:hover {
+    background-color: #ff9800;
+}
+
+#edit-button:active {
+    background-color: #ff5722;
+}
+
+#edit-container {
+    position: absolute;
+    left: 30%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(255, 255, 255);
+    padding: 150px;
+    display: none;
+}
+
+#edit-container.visible {
+    display: block;
+}
+
+#edit-container form {
+    /* Stilisierung des Formulars */
+}
+
+#start-button {
+    position: absolute;
+    left: 750px;
+    top: 20px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    background-color: #29afe9;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}

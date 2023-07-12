@@ -9,10 +9,11 @@ keine Zusammenarbeit(en)
 var finaltask;
 (function (finaltask) {
     window.addEventListener("load", handleLoad);
-    let editbutton;
     let canvas;
     let backgroundCanvas;
     let backgroundContext;
+    let editbutton;
+    let startbutton;
     function handleLoad(_event) {
         canvas = document.querySelector('canvas#front');
         finaltask.crc2 = canvas.getContext('2d');
@@ -29,17 +30,30 @@ var finaltask;
         drawstandingDesk(backgroundContext, { x: 670, y: 600 }, 50);
         drawstandingDesk(backgroundContext, { x: 300, y: 640 }, 50);
         createEditButton();
+        createStartButton();
         drawEarnings();
     }
     ;
     // Die Buttons auf dem Canvas
     function createEditButton() {
         editbutton = document.createElement("button");
-        editbutton.innerHTML = "Edit your ice cream counter";
-        editbutton.style.position = "absolute";
-        editbutton.style.left = canvas.offsetLeft + 280 + "px";
-        editbutton.style.top = canvas.offsetTop + 280 + "px";
+        editbutton.innerHTML = "View your ice cream counter";
+        editbutton.id = "edit-button";
         document.body.appendChild(editbutton);
+        editbutton.addEventListener("click", handleEditButtonClick);
+    }
+    // Interaktion mit dem Edit Button (ermöglicht Bearbeiten des Eisangebots)
+    let editContainer = document.getElementById("edit-container");
+    function handleEditButtonClick(event) {
+        event.preventDefault();
+        editContainer = document.getElementById("edit-container");
+        editContainer.classList.add("visible");
+    }
+    function createStartButton() {
+        startbutton = document.createElement("button");
+        startbutton.innerHTML = "Open the ice cafe for visitors";
+        startbutton.id = "start-button";
+        document.body.appendChild(startbutton);
     }
     // Funktionen für das Berechnen und Anzeigen der Einnahmen
     function drawEarnings() {

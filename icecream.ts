@@ -10,11 +10,7 @@ namespace finaltask {
     }
   }
 
-  class Sauce extends Eissorte {
-   
-  }
-
-  class Toppings extends Eissorte {
+  class Topping extends Eissorte {
    
   }
 

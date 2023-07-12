@@ -8,9 +8,7 @@ var finaltask;
             this.preis = preis;
         }
     }
-    class Sauce extends Eissorte {
-    }
-    class Toppings extends Eissorte {
+    class Topping extends Eissorte {
     }
 })(finaltask || (finaltask = {}));
 //# sourceMappingURL=icecream.js.map

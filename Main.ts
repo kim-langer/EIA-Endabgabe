@@ -8,7 +8,6 @@ keine Zusammenarbeit(en)
 */
 namespace finaltask {
 
-
     window.addEventListener("load", handleLoad);
 
     interface Vector {
@@ -16,13 +15,12 @@ namespace finaltask {
         y: number;
     }
 
-    let editbutton: HTMLButtonElement;
-
     export let crc2: CanvasRenderingContext2D;
     let canvas: HTMLCanvasElement;
     let backgroundCanvas: HTMLCanvasElement;
     let backgroundContext: CanvasRenderingContext2D;
-
+    let editbutton: HTMLButtonElement;
+    let startbutton: HTMLButtonElement;
 
     function handleLoad(_event: Event): void {
 
@@ -43,28 +41,51 @@ namespace finaltask {
         drawstandingDesk(backgroundContext, { x: 300, y: 640 }, 50)
 
         createEditButton();
+        createStartButton();
         drawEarnings();
 
     };
 
 
+
     // Die Buttons auf dem Canvas
     function createEditButton(): void {
         editbutton = document.createElement("button");
-        editbutton.innerHTML = "Edit your ice cream counter";
-        editbutton.style.position = "absolute";
-        editbutton.style.left = canvas.offsetLeft + 280 + "px";
-        editbutton.style.top = canvas.offsetTop + 280 + "px";
+        editbutton.innerHTML = "View your ice cream counter";
+        editbutton.id = "edit-button"
 
         document.body.appendChild(editbutton);
+
+        editbutton.addEventListener("click", handleEditButtonClick);
+ }
+
+    // Interaktion mit dem Edit Button (ermöglicht Bearbeiten des Eisangebots)
+    let editContainer = document.getElementById("edit-container");
+
+    function handleEditButtonClick(event: Event): void {
+        event.preventDefault();
+        editContainer = document.getElementById("edit-container") as HTMLDivElement;
+        editContainer.classList.add("visible");
     }
+
+
+    function createStartButton(): void {
+        startbutton = document.createElement("button");
+        startbutton.innerHTML = "Open the ice cafe for visitors";
+        startbutton.id = "start-button"
+
+        document.body.appendChild(startbutton);
+
+      
+ }
+
 
     // Funktionen für das Berechnen und Anzeigen der Einnahmen
     function drawEarnings(): void {
         crc2.fillStyle = "black";
         crc2.font = "bold 16px Arial";
         crc2.fillText("Your Earnings:", 20, 40); // Position des Textes anpassen --> + earnings.toFixed(2) + " €", 10, 20)
-      }
+    }
 
     // Hintergrundfarbe zeichnen
     function drawBackground(crc2: CanvasRenderingContext2D): void {
