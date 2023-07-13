@@ -58,17 +58,20 @@ var finaltask;
           <input type="number" id="price-input" placeholder="What should it cost?">
           <label for="color-input">Choose a color</label>
           <input type="color" id="color-input">
-          <label for="type-input">Flavor or Topping?</label>
+          <label for="type-input">Flavour or Topping?</label>
           <select id="type-input">
-            <option value="flavor">Flavor</option>
+            <option value="flavour">Flavour</option>
             <option value="topping">Topping</option>
           </select>
           <button id="addbutton" type="submit">Add</button>
         </div>
       `;
         editContainer.innerHTML = InputHtml;
+        // Eisauswahl bestätigen
+        let addbutton = document.getElementById("addbutton");
+        addbutton.addEventListener("click", handleFormSubmit);
     }
-    // Neues Eisangebot hinzufügen und speichern
+    // Neues Eisangebot im Array speichern
     function handleFormSubmit(event) {
         event.preventDefault();
         // Formulardaten abrufen
@@ -77,10 +80,10 @@ var finaltask;
         let colorInput = document.getElementById("color-input");
         let typeInput = document.getElementById("type-input");
         // Neue Eissorte oder neues Topping erstellen
-        const name = nameInput.value;
-        const preis = parseFloat(priceInput.value);
-        const color = colorInput.value;
-        const isFlavour = typeInput.value === "flavor";
+        let name = nameInput.value;
+        let preis = parseFloat(priceInput.value);
+        let color = colorInput.value;
+        let isFlavour = typeInput.value === "flavour";
         if (isFlavour) {
             let eissorte = new finaltask.IceCream(name, preis, color);
             eissorten.push(eissorte);
@@ -93,13 +96,20 @@ var finaltask;
         nameInput.value = "";
         priceInput.value = "";
         colorInput.value = "";
-        typeInput.value = "flavor";
+        typeInput.value = "flavour";
         editContainer.classList.remove("visible");
-        console.log(eissorten); // Ausgabe der gespeicherten Eissorten im Array
+        // Daten im HTML-Div "icecreamselection" darstellen
+        let icecreamSelectionDiv = document.getElementById("icecreamselection");
+        let newicecream = document.createElement("div");
+        icecreamSelectionDiv.innerHTML = `
+    <p>Name: ${name}</p>
+    <p>Price: ${preis.toFixed(2)} €</p>
+    <p>Color: ${color}</p>
+  `;
+        icecreamSelectionDiv.appendChild(newicecream);
+        console.log(eissorten);
     }
-    // Event-Listener für das Formular-Submit-Ereignis
-    let addbutton = document.getElementById("addbutton");
-    addbutton.addEventListener("submit", handleFormSubmit);
+    // Button zum Spiel starten
     function createStartButton() {
         startbutton = document.createElement("button");
         startbutton.innerHTML = "Open the ice cafe for visitors";

@@ -78,9 +78,9 @@ namespace finaltask {
           <input type="number" id="price-input" placeholder="What should it cost?">
           <label for="color-input">Choose a color</label>
           <input type="color" id="color-input">
-          <label for="type-input">Flavor or Topping?</label>
+          <label for="type-input">Flavour or Topping?</label>
           <select id="type-input">
-            <option value="flavor">Flavor</option>
+            <option value="flavour">Flavour</option>
             <option value="topping">Topping</option>
           </select>
           <button id="addbutton" type="submit">Add</button>
@@ -88,9 +88,14 @@ namespace finaltask {
       `;
 
         editContainer.innerHTML = InputHtml;
+
+        // Eisauswahl bestätigen
+        let addbutton = document.getElementById("addbutton");
+        addbutton.addEventListener("click", handleFormSubmit);
+
     }
 
-    // Neues Eisangebot hinzufügen und speichern
+    // Neues Eisangebot im Array speichern
     function handleFormSubmit(event: Event) {
         event.preventDefault();
 
@@ -101,10 +106,10 @@ namespace finaltask {
         let typeInput = document.getElementById("type-input") as HTMLSelectElement;
 
         // Neue Eissorte oder neues Topping erstellen
-        const name = nameInput.value;
-        const preis = parseFloat(priceInput.value);
-        const color = colorInput.value;
-        const isFlavour = typeInput.value === "flavor";
+        let name = nameInput.value;
+        let preis = parseFloat(priceInput.value);
+        let color = colorInput.value;
+        let isFlavour = typeInput.value === "flavour";
 
         if (isFlavour) {
             let eissorte = new IceCream(name, preis, color);
@@ -118,18 +123,24 @@ namespace finaltask {
         nameInput.value = "";
         priceInput.value = "";
         colorInput.value = "";
-        typeInput.value = "flavor";
+        typeInput.value = "flavour";
 
         editContainer.classList.remove("visible");
 
-        console.log(eissorten); // Ausgabe der gespeicherten Eissorten im Array
+        // Daten im HTML-Div "icecreamselection" darstellen
+        let icecreamSelectionDiv = document.getElementById("icecreamselection");
+        let newicecream = document.createElement("div");
+        icecreamSelectionDiv.innerHTML = `
+    <p>Name: ${name}</p>
+    <p>Price: ${preis.toFixed(2)} €</p>
+    <p>Color: ${color}</p>
+  `;
+        icecreamSelectionDiv.appendChild(newicecream);
+        console.log(eissorten);
     }
 
-    // Event-Listener für das Formular-Submit-Ereignis
-    let addbutton = document.getElementById("addbutton");
-    addbutton.addEventListener("submit", handleFormSubmit);
 
-
+    // Button zum Spiel starten
     function createStartButton(): void {
         startbutton = document.createElement("button");
         startbutton.innerHTML = "Open the ice cafe for visitors";
@@ -221,20 +232,20 @@ namespace finaltask {
         crc2.lineWidth = 1;
         crc2.stroke();
         crc2.closePath();
-      
+
         // Augen
         crc2.beginPath();
         crc2.arc(position.x - radius / 3, position.y - radius / 6, radius / 8, 0, 2 * Math.PI);
         crc2.fillStyle = "black";
         crc2.fill();
         crc2.closePath();
-      
+
         crc2.beginPath();
         crc2.arc(position.x + radius / 3, position.y - radius / 6, radius / 8, 0, 2 * Math.PI);
         crc2.fillStyle = "black";
         crc2.fill();
         crc2.closePath();
-      
+
         // Mund
         crc2.beginPath();
         crc2.arc(position.x, position.y + radius / 6, radius / 3, 0.2 * Math.PI, 0.8 * Math.PI);
@@ -242,6 +253,7 @@ namespace finaltask {
         crc2.lineWidth = 3;
         crc2.stroke();
         crc2.closePath();
-      }
+    }
+
 
 }

@@ -50,10 +50,6 @@ canvas {
     display: block;
 }
 
-#edit-container form {
-    /* Stilisierung des Formulars */
-}
-
 #start-button {
     position: absolute;
     left: 750px;
@@ -76,3 +72,9 @@ canvas {
 
 }
 
+#icecreamselection {
+   left: 170;
+top: 230;
+        width: 500;
+        height: 200;
+}
