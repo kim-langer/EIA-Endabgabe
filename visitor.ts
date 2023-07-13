@@ -56,7 +56,7 @@ namespace finaltask01 {
 export class happyvisitor extends Visitor {
 
   constructor(x: number, y: number, pricetopay: number) {
-    super(x, y, pricetopay); }
+    super(x, y, pricetopay) }
     
     drawvisitor(): void {
 
@@ -95,6 +95,6 @@ export class happyvisitor extends Visitor {
     };
 
 
-    }
+    };
 
 }

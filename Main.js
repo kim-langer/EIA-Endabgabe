@@ -1,10 +1,9 @@
 /*Aufgabe: Abschlussarbeit Eisdealer
 Name: Kim Langer
 Matrikelnummer: 272232
-Quellen: W3 Schools, ChatGPT, bisherige Aufgaben EIA2
-
+Quellen:
 Anmerkungen:
-keine Zusammenarbeit(en)
+
 */
 var finaltask01;
 (function (finaltask01) {
@@ -34,6 +33,7 @@ var finaltask01;
     }
     ;
     let eissorten = []; // Array zur Speicherung der Eissorten
+    // Eisgame starten 
     function startgame() {
         let happyVisitor = new finaltask01.happyvisitor(1170, 200, 0);
         happyVisitor.drawvisitor();

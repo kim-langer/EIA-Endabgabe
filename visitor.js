@@ -83,5 +83,6 @@ var finaltask01;
         ;
     }
     finaltask01.happyvisitor = happyvisitor;
+    ;
 })(finaltask01 || (finaltask01 = {}));
 //# sourceMappingURL=visitor.js.map
