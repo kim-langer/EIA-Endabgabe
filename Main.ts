@@ -10,17 +10,17 @@ namespace finaltask {
 
     window.addEventListener("load", handleLoad);
 
-    interface Vector {
+    export interface Vector {
         x: number;
         y: number;
     }
 
     export let crc2: CanvasRenderingContext2D;
-    let canvas: HTMLCanvasElement;
-    let backgroundCanvas: HTMLCanvasElement;
-    let backgroundContext: CanvasRenderingContext2D;
-    let editbutton: HTMLButtonElement;
-    let startbutton: HTMLButtonElement;
+    export let canvas: HTMLCanvasElement;
+    export let backgroundCanvas: HTMLCanvasElement;
+    export let backgroundContext: CanvasRenderingContext2D;
+    export let editbutton: HTMLButtonElement;
+    export let startbutton: HTMLButtonElement;
 
     function handleLoad(_event: Event): void {
 
@@ -40,15 +40,23 @@ namespace finaltask {
         drawstandingDesk(backgroundContext, { x: 670, y: 600 }, 50)
         drawstandingDesk(backgroundContext, { x: 300, y: 640 }, 50)
 
-        drawSmiley(backgroundContext, { x: 1170, y: 100 }, 30)
+        drawSmiley(backgroundContext, { x: 1170, y: 1170 }, 30)
 
         createEditButton();
         createStartButton();
         drawEarnings();
+        startgame();
 
     };
 
     let eissorten: IceCream[] = []; // Array zur Speicherung der Eissorten
+
+    function startgame() {
+
+        let happyVisitor = new happyvisitor(1170, 200);
+        happyVisitor.drawvisitor();
+
+    };
 
 
     // Der "Add a new Ice Cream Button"
@@ -96,8 +104,8 @@ namespace finaltask {
     }
 
     // Neues Eisangebot im Array speichern
-    function handleFormSubmit(event: Event) {
-        event.preventDefault();
+    function handleFormSubmit(_event: Event) {
+        _event.preventDefault();
 
         // Formulardaten abrufen
         let nameInput = document.getElementById("text-input") as HTMLInputElement;
@@ -189,20 +197,20 @@ namespace finaltask {
     };
 
     // Eisdealer/User zeichnen (nur zur Veranschauung da, keine Interaktion möglich)
-    function drawicecreamdealer(crc2: CanvasRenderingContext2D, position: Vector, size: Vector) {
+    function drawicecreamdealer(crc2: CanvasRenderingContext2D, _position: Vector, _size: Vector) {
         crc2.save();
-        crc2.translate(position.x, position.y);
+        crc2.translate(_position.x, _position.y);
 
         // Körper
         crc2.beginPath();
-        crc2.arc(0, 0, size.x / 4, 0, 2 * Math.PI);
+        crc2.arc(0, 0, _size.x / 4, 0, 2 * Math.PI);
         crc2.fillStyle = "blue";
         crc2.fill();
         crc2.closePath();
 
         // Kopf
         crc2.beginPath();
-        crc2.arc(0, -size.x / 4, size.x / 8, 0, 2 * Math.PI);
+        crc2.arc(0, -_size.x / 4, _size.x / 8, 0, 2 * Math.PI);
         crc2.fillStyle = "#D9BB9B";
         crc2.fill();
         crc2.closePath();
@@ -210,11 +218,11 @@ namespace finaltask {
         crc2.restore();
     };
 
-    function drawstandingDesk(crc2: CanvasRenderingContext2D, position: Vector, radius: number): void {
+    function drawstandingDesk(crc2: CanvasRenderingContext2D, _position: Vector, _radius: number): void {
         crc2.save();
 
         crc2.beginPath();
-        crc2.arc(position.x, position.y, radius, 0, 2 * Math.PI);
+        crc2.arc(_position.x, _position.y, _radius, 0, 2 * Math.PI);
         crc2.fillStyle = "#79553C";
         crc2.fill();
         crc2.closePath();
@@ -222,10 +230,10 @@ namespace finaltask {
         crc2.restore();
     };
 
-    function drawSmiley(crc2: CanvasRenderingContext2D, position: Vector, radius: number): void {
+    function drawSmiley(crc2: CanvasRenderingContext2D, _position: Vector, _radius: number): void {
         // Gesicht
         crc2.beginPath();
-        crc2.arc(position.x, position.y, radius, 0, 2 * Math.PI);
+        crc2.arc(_position.x, _position.y, _radius, 0, 2 * Math.PI);
         crc2.fillStyle = "lightgreen";
         crc2.fill();
         crc2.strokeStyle = "black";
@@ -235,20 +243,20 @@ namespace finaltask {
 
         // Augen
         crc2.beginPath();
-        crc2.arc(position.x - radius / 3, position.y - radius / 6, radius / 8, 0, 2 * Math.PI);
+        crc2.arc(_position.x - _radius / 3, _position.y - _radius / 6, _radius / 8, 0, 2 * Math.PI);
         crc2.fillStyle = "black";
         crc2.fill();
         crc2.closePath();
 
         crc2.beginPath();
-        crc2.arc(position.x + radius / 3, position.y - radius / 6, radius / 8, 0, 2 * Math.PI);
+        crc2.arc(_position.x + _radius / 3, _position.y - _radius / 6, _radius / 8, 0, 2 * Math.PI);
         crc2.fillStyle = "black";
         crc2.fill();
         crc2.closePath();
 
         // Mund
         crc2.beginPath();
-        crc2.arc(position.x, position.y + radius / 6, radius / 3, 0.2 * Math.PI, 0.8 * Math.PI);
+        crc2.arc(_position.x, _position.y + _radius / 6, _radius / 3, 0.2 * Math.PI, 0.8 * Math.PI);
         crc2.strokeStyle = "black";
         crc2.lineWidth = 3;
         crc2.stroke();

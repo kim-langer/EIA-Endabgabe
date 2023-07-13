@@ -33,8 +33,13 @@ var finaltask;
         createEditButton();
         createStartButton();
         drawEarnings();
+        startgame();
     }
     ;
+    function startgame() {
+        let happyVisitor = new finaltask.happyvisitor();
+        happyVisitor.drawvisitor({ x: 300, y: 640 });
+    }
     let eissorten = []; // Array zur Speicherung der Eissorten
     // Der "Add a new Ice Cream Button"
     function createEditButton() {
@@ -72,8 +77,8 @@ var finaltask;
         addbutton.addEventListener("click", handleFormSubmit);
     }
     // Neues Eisangebot im Array speichern
-    function handleFormSubmit(event) {
-        event.preventDefault();
+    function handleFormSubmit(_event) {
+        _event.preventDefault();
         // Formulardaten abrufen
         let nameInput = document.getElementById("text-input");
         let priceInput = document.getElementById("price-input");
@@ -149,38 +154,38 @@ var finaltask;
     }
     ;
     // Eisdealer/User zeichnen (nur zur Veranschauung da, keine Interaktion möglich)
-    function drawicecreamdealer(crc2, position, size) {
+    function drawicecreamdealer(crc2, _position, _size) {
         crc2.save();
-        crc2.translate(position.x, position.y);
+        crc2.translate(_position.x, _position.y);
         // Körper
         crc2.beginPath();
-        crc2.arc(0, 0, size.x / 4, 0, 2 * Math.PI);
+        crc2.arc(0, 0, _size.x / 4, 0, 2 * Math.PI);
         crc2.fillStyle = "blue";
         crc2.fill();
         crc2.closePath();
         // Kopf
         crc2.beginPath();
-        crc2.arc(0, -size.x / 4, size.x / 8, 0, 2 * Math.PI);
+        crc2.arc(0, -_size.x / 4, _size.x / 8, 0, 2 * Math.PI);
         crc2.fillStyle = "#D9BB9B";
         crc2.fill();
         crc2.closePath();
         crc2.restore();
     }
     ;
-    function drawstandingDesk(crc2, position, radius) {
+    function drawstandingDesk(crc2, _position, _radius) {
         crc2.save();
         crc2.beginPath();
-        crc2.arc(position.x, position.y, radius, 0, 2 * Math.PI);
+        crc2.arc(_position.x, _position.y, _radius, 0, 2 * Math.PI);
         crc2.fillStyle = "#79553C";
         crc2.fill();
         crc2.closePath();
         crc2.restore();
     }
     ;
-    function drawSmiley(crc2, position, radius) {
+    function drawSmiley(crc2, _position, _radius) {
         // Gesicht
         crc2.beginPath();
-        crc2.arc(position.x, position.y, radius, 0, 2 * Math.PI);
+        crc2.arc(_position.x, _position.y, _radius, 0, 2 * Math.PI);
         crc2.fillStyle = "lightgreen";
         crc2.fill();
         crc2.strokeStyle = "black";
@@ -189,18 +194,18 @@ var finaltask;
         crc2.closePath();
         // Augen
         crc2.beginPath();
-        crc2.arc(position.x - radius / 3, position.y - radius / 6, radius / 8, 0, 2 * Math.PI);
+        crc2.arc(_position.x - _radius / 3, _position.y - _radius / 6, _radius / 8, 0, 2 * Math.PI);
         crc2.fillStyle = "black";
         crc2.fill();
         crc2.closePath();
         crc2.beginPath();
-        crc2.arc(position.x + radius / 3, position.y - radius / 6, radius / 8, 0, 2 * Math.PI);
+        crc2.arc(_position.x + _radius / 3, _position.y - _radius / 6, _radius / 8, 0, 2 * Math.PI);
         crc2.fillStyle = "black";
         crc2.fill();
         crc2.closePath();
         // Mund
         crc2.beginPath();
-        crc2.arc(position.x, position.y + radius / 6, radius / 3, 0.2 * Math.PI, 0.8 * Math.PI);
+        crc2.arc(_position.x, _position.y + _radius / 6, _radius / 3, 0.2 * Math.PI, 0.8 * Math.PI);
         crc2.strokeStyle = "black";
         crc2.lineWidth = 3;
         crc2.stroke();

@@ -78,3 +78,20 @@ top: 230;
         width: 500;
         height: 200;
 }
+
+#assign-button {
+    position: absolute;
+    left: 750px;
+    top: 70px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    background-color: #29afe9;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+ }
