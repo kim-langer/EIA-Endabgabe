@@ -1,4 +1,4 @@
-namespace finaltask {
+namespace finaltask01 {
 
    export enum MoodVisitor {
         Happy,
@@ -6,19 +6,19 @@ namespace finaltask {
         Angry,
     }
 
-   export class Visitor {
+   export abstract class Visitor {
         x: number;
         y: number;
         mood: MoodVisitor;
         pricetopay: number;
         
-        constructor(x: number, y: number) {
+        constructor(x: number, y: number, pricetopay: number) {
           this.x = x;
           this.y = y;
         }
         
         drawvisitor(): void {
-          // Besucher zeichnen
+        
         }
         
         createButton(): void {
@@ -54,6 +54,9 @@ namespace finaltask {
       }
 
 export class happyvisitor extends Visitor {
+
+  constructor(x: number, y: number, pricetopay: number) {
+    super(x, y, pricetopay); }
     
     drawvisitor(): void {
 

@@ -6,7 +6,7 @@ Quellen: W3 Schools, ChatGPT, bisherige Aufgaben EIA2
 Anmerkungen: 
 keine Zusammenarbeit(en)
 */
-namespace finaltask {
+namespace finaltask01 {
 
     window.addEventListener("load", handleLoad);
 
@@ -19,8 +19,8 @@ namespace finaltask {
     export let canvas: HTMLCanvasElement;
     export let backgroundCanvas: HTMLCanvasElement;
     export let backgroundContext: CanvasRenderingContext2D;
-    export let editbutton: HTMLButtonElement;
-    export let startbutton: HTMLButtonElement;
+    let editbutton: HTMLButtonElement;
+   let startbutton: HTMLButtonElement;
 
     function handleLoad(_event: Event): void {
 
@@ -52,10 +52,8 @@ namespace finaltask {
     let eissorten: IceCream[] = []; // Array zur Speicherung der Eissorten
 
     function startgame() {
-
-        let happyVisitor = new happyvisitor(1170, 200);
+        let happyVisitor = new happyvisitor(1170, 200, 0);
         happyVisitor.drawvisitor();
-
     };
 
 

@@ -6,41 +6,39 @@ Quellen: W3 Schools, ChatGPT, bisherige Aufgaben EIA2
 Anmerkungen:
 keine Zusammenarbeit(en)
 */
-var finaltask;
-(function (finaltask) {
+var finaltask01;
+(function (finaltask01) {
     window.addEventListener("load", handleLoad);
-    let canvas;
-    let backgroundCanvas;
-    let backgroundContext;
     let editbutton;
     let startbutton;
     function handleLoad(_event) {
-        canvas = document.querySelector('canvas#front');
-        finaltask.crc2 = canvas.getContext('2d');
+        finaltask01.canvas = document.querySelector('canvas#front');
+        finaltask01.crc2 = finaltask01.canvas.getContext('2d');
         // Hintergrund mit statischen Zeichnungen auf ein anderes Canvas speichern
-        backgroundCanvas = document.querySelector('canvas#back');
-        backgroundCanvas.width = canvas.width;
-        backgroundCanvas.height = canvas.height;
-        backgroundContext = backgroundCanvas.getContext("2d");
-        drawBackground(backgroundContext);
-        drawicecreamdealer(backgroundContext, { x: 400, y: 200 }, { x: 200, y: 280 });
-        drawicecreamcounter(backgroundContext);
-        drawstandingDesk(backgroundContext, { x: 900, y: 280 }, 50);
-        drawstandingDesk(backgroundContext, { x: 940, y: 600 }, 50);
-        drawstandingDesk(backgroundContext, { x: 670, y: 600 }, 50);
-        drawstandingDesk(backgroundContext, { x: 300, y: 640 }, 50);
-        drawSmiley(backgroundContext, { x: 1170, y: 100 }, 30);
+        finaltask01.backgroundCanvas = document.querySelector('canvas#back');
+        finaltask01.backgroundCanvas.width = finaltask01.canvas.width;
+        finaltask01.backgroundCanvas.height = finaltask01.canvas.height;
+        finaltask01.backgroundContext = finaltask01.backgroundCanvas.getContext("2d");
+        drawBackground(finaltask01.backgroundContext);
+        drawicecreamdealer(finaltask01.backgroundContext, { x: 400, y: 200 }, { x: 200, y: 280 });
+        drawicecreamcounter(finaltask01.backgroundContext);
+        drawstandingDesk(finaltask01.backgroundContext, { x: 900, y: 280 }, 50);
+        drawstandingDesk(finaltask01.backgroundContext, { x: 940, y: 600 }, 50);
+        drawstandingDesk(finaltask01.backgroundContext, { x: 670, y: 600 }, 50);
+        drawstandingDesk(finaltask01.backgroundContext, { x: 300, y: 640 }, 50);
+        drawSmiley(finaltask01.backgroundContext, { x: 1170, y: 1170 }, 30);
         createEditButton();
         createStartButton();
         drawEarnings();
         startgame();
     }
     ;
-    function startgame() {
-        let happyVisitor = new finaltask.happyvisitor();
-        happyVisitor.drawvisitor({ x: 300, y: 640 });
-    }
     let eissorten = []; // Array zur Speicherung der Eissorten
+    function startgame() {
+        let happyVisitor = new finaltask01.happyvisitor(1170, 200, 0);
+        happyVisitor.drawvisitor();
+    }
+    ;
     // Der "Add a new Ice Cream Button"
     function createEditButton() {
         editbutton = document.createElement("button");
@@ -90,11 +88,11 @@ var finaltask;
         let color = colorInput.value;
         let isFlavour = typeInput.value === "flavour";
         if (isFlavour) {
-            let eissorte = new finaltask.IceCream(name, preis, color);
+            let eissorte = new finaltask01.IceCream(name, preis, color);
             eissorten.push(eissorte);
         }
         else {
-            let topping = new finaltask.Topping(name, preis, color);
+            let topping = new finaltask01.Topping(name, preis, color);
             eissorten.push(topping);
         }
         // Formular zurücksetzen
@@ -123,9 +121,9 @@ var finaltask;
     }
     // Funktionen für das Berechnen und Anzeigen der Einnahmen
     function drawEarnings() {
-        finaltask.crc2.fillStyle = "black";
-        finaltask.crc2.font = "bold 16px Arial";
-        finaltask.crc2.fillText("Your Earnings:", 20, 40); // Position des Textes anpassen --> + earnings.toFixed(2) + " €", 10, 20)
+        finaltask01.crc2.fillStyle = "black";
+        finaltask01.crc2.font = "bold 16px Arial";
+        finaltask01.crc2.fillText("Your Earnings:", 20, 40); // Position des Textes anpassen --> + earnings.toFixed(2) + " €", 10, 20)
     }
     // Hintergrundfarbe zeichnen
     function drawBackground(crc2) {
@@ -211,5 +209,5 @@ var finaltask;
         crc2.stroke();
         crc2.closePath();
     }
-})(finaltask || (finaltask = {}));
+})(finaltask01 || (finaltask01 = {}));
 //# sourceMappingURL=Main.js.map
