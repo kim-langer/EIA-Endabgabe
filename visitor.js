@@ -79,12 +79,12 @@ var finaltask01;
         }
         ordericecream() {
             // Wähle eine zufällige Eissorte
-            let generateOrder = Math.floor(Math.random() * finaltask01.eissorten.length);
-            let chosenIceCream = finaltask01.eissorten[generateOrder];
-            // Erstelle eine Bestellung mit der gewählten Eissorte
-            this.order = (chosenIceCream);
+            if (finaltask01.eissorten.length > 0) {
+                let generateOrder = Math.floor(Math.random() * finaltask01.eissorten.length);
+                let chosenIceCream = finaltask01.eissorten[generateOrder];
+                this.order = chosenIceCream;
+            }
         }
-        ;
         showOrderButton() {
             // Erstelle den Button
             let vieworderbutton = document.createElement("button");
@@ -94,23 +94,26 @@ var finaltask01;
             vieworderbutton.style.top = `${this.y}px`;
             vieworderbutton.addEventListener("click", () => {
                 this.showandfulfillOrder();
+                vieworderbutton.remove();
             });
             document.body.appendChild(vieworderbutton);
-            // Speichere eine Referenz auf den Button
-            this.receiptButton = vieworderbutton;
         }
         showandfulfillOrder() {
-            let vieworderbutton = document.querySelector("#vieworderbutton");
-            // Überprüfe, ob eine Bestellung vorhanden ist
-            if (this.order) {
-                // Zeige die Bestellung an
-                console.log("Order: ", this.order);
-                // Entferne den Button
-                if (this.receiptButton) {
-                    this.receiptButton.remove();
-                    this.receiptButton = null;
-                }
-            }
+            let fulfillOrderContainer = document.getElementById("fulfillorder-container");
+            fulfillOrderContainer.classList.add("visible");
+            // Bestellung anzeigen
+            let orderText = document.createElement("p");
+            orderText.innerText = "Order: " + this.order.name + " Price: " + this.order.preis.toFixed(2) + " €";
+            fulfillOrderContainer.appendChild(orderText);
+            let orderHTML = `
+          <select id="type-input">
+            <option value=" ">Flavour</option>
+            <option value=" ">Topping</option>
+          </select>
+          <button id="addbutton" type="submit">Fulfill Order</button>
+        </div>
+      `;
+            fulfillOrderContainer.innerHTML = orderHTML;
         }
     }
     finaltask01.Visitor = Visitor;

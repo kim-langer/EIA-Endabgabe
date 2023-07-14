@@ -31,13 +31,21 @@ var finaltask01;
     }
     ;
     finaltask01.eissorten = []; // Array zur Speicherung der Eissorten
+    // Hinweis auf fehlende Eissorten
+    function showAlert() {
+        alert("Please fill the ice cream counter before you start the game!");
+    }
     // Eisgame starten 
     function startgame() {
-        let newVisitor = new finaltask01.Visitor(565, 62, 0, 0);
-        newVisitor.drawvisitor();
-        newVisitor.createButton();
+        if (finaltask01.eissorten.length === 0) {
+            showAlert();
+        }
+        else {
+            let newVisitor = new finaltask01.Visitor(565, 62, 0, 0);
+            newVisitor.drawvisitor();
+            newVisitor.createButton();
+        }
     }
-    ;
     // Der "Add a new Ice Cream Button"
     function createEditButton() {
         editbutton = document.createElement("button");

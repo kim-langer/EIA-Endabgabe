@@ -100,19 +100,33 @@ top: 230;
     background-color: #72c657;
  }
 
- #vieworderbutton {
+#vieworderbutton {
     position: absolute;
-    padding: 5px 10px;
-    font-size: 12px;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
-    background-color: #4da9dd;
-    color: #fff;
+    background-color: #FF6384; /* Hintergrundfarbe */
+    color: #FFFFFF; /* Textfarbe */
     border: none;
-    border-radius: 20px;
+    padding: 10px 20px; /* Innenabstand */
+    font-size: 16px; /* Schriftgröße */
+    border-radius: 5px; /* Abrundung der Ecken */
     cursor: pointer;
-    transition: background-color 0.3s ease;
- }
+  }
+  
+  #vieworderbutton:hover {
+    background-color: #FF478A; /* Hintergrundfarbe beim Hover-Zustand */
+  }
+  
+  #fulfillorder-container {
+    position: absolute;
+    left: 30%;
+    top: 30%;
+    width: 500px;
+    height: 300px;
+    transform: translate(-50%, -50%);
+    background-color: rgb(255, 255, 255);
+    padding: 40px;
+    display: none;
+}
 
- 
+#fulfillorder-container.visible {
+    display: block;
+}

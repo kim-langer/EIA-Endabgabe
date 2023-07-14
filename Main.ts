@@ -47,13 +47,22 @@ namespace finaltask01 {
 
     export let eissorten: IceCream[] = []; // Array zur Speicherung der Eissorten
 
+    // Hinweis auf fehlende Eissorten
+    function showAlert(): void {
+        alert("Please fill the ice cream counter before you start the game!");
+      }
+      
     // Eisgame starten 
-    function startgame() {
-        let newVisitor = new Visitor(565, 62, 0, 0);
-        newVisitor.drawvisitor();
-        newVisitor.createButton();
-    };
-
+    function startgame(): void {
+        if (eissorten.length === 0) {
+          showAlert();
+        } else {
+          let newVisitor = new Visitor(565, 62, 0, 0);
+          newVisitor.drawvisitor();
+          newVisitor.createButton();
+        }
+      }
+      
 
     // Der "Add a new Ice Cream Button"
     function createEditButton(): void {

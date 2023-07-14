@@ -95,12 +95,12 @@ namespace finaltask01 {
         ordericecream():void  {
 
           // Wähle eine zufällige Eissorte
-      let generateOrder = Math.floor(Math.random() * eissorten.length);
-      let chosenIceCream = eissorten[generateOrder];
-
-      // Erstelle eine Bestellung mit der gewählten Eissorte
-      this.order = (chosenIceCream);
-        };
+          if (eissorten.length > 0) {
+            let generateOrder = Math.floor(Math.random() * eissorten.length);
+            let chosenIceCream = eissorten[generateOrder];
+      
+            this.order = chosenIceCream;
+          } }
 
         showOrderButton(): void {
           // Erstelle den Button
@@ -112,31 +112,38 @@ namespace finaltask01 {
 
           vieworderbutton.addEventListener("click", () => {
             this.showandfulfillOrder();
+            vieworderbutton.remove();
           });
-
           document.body.appendChild(vieworderbutton);
-    
-          // Speichere eine Referenz auf den Button
-          this.receiptButton = vieworderbutton;
         }
+      
     
         showandfulfillOrder(): void {
 
-        let vieworderbutton = document.querySelector("#vieworderbutton")
-          // Überprüfe, ob eine Bestellung vorhanden ist
-          if (this.order) {
-            // Zeige die Bestellung an
-            console.log("Order: ", this.order);
+          let fulfillOrderContainer = document.getElementById("fulfillorder-container") as HTMLDivElement;
+          fulfillOrderContainer.classList.add("visible");
+        
+          // Bestellung anzeigen
+            let orderText = document.createElement("p");
+            orderText.innerText = "Order: " + this.order.name + " Price: " + this.order.preis.toFixed(2) + " €";
+            fulfillOrderContainer.appendChild(orderText);
+
+            let orderHTML = `
+          <select id="type-input">
+            <option value=" ">Flavour</option>
+            <option value=" ">Topping</option>
+          </select>
+          <button id="addbutton" type="submit">Fulfill Order</button>
+        </div>
+      `;
     
-            // Entferne den Button
-            if (this.receiptButton) {
-              this.receiptButton.remove();
-              this.receiptButton = null;
-            }
-          }
+            fulfillOrderContainer.innerHTML = orderHTML;
+
+        }
+        
 
 
   
       }
 
-} }
+} 
