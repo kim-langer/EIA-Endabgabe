@@ -11,11 +11,38 @@ var finaltask01;
         y;
         mood;
         pricetopay;
-        constructor(x, y, pricetopay) {
+        constructor(x, y, pricetopay, mood) {
             this.x = x;
             this.y = y;
         }
         drawvisitor() {
+            finaltask01.crc2.save();
+            finaltask01.crc2.translate(this.x, this.y);
+            finaltask01.crc2.beginPath();
+            finaltask01.crc2.arc(this.x, this.y, 30, 0, 2 * Math.PI);
+            finaltask01.crc2.fillStyle = "lightgreen";
+            finaltask01.crc2.fill();
+            finaltask01.crc2.strokeStyle = "black";
+            finaltask01.crc2.lineWidth = 1;
+            finaltask01.crc2.stroke();
+            finaltask01.crc2.closePath();
+            finaltask01.crc2.beginPath();
+            finaltask01.crc2.arc(this.x - 30 / 3, this.y - 30 / 6, 30 / 8, 0, 2 * Math.PI);
+            finaltask01.crc2.fillStyle = "black";
+            finaltask01.crc2.fill();
+            finaltask01.crc2.closePath();
+            finaltask01.crc2.beginPath();
+            finaltask01.crc2.arc(this.x + 30 / 3, this.y - 30 / 6, 30 / 8, 0, 2 * Math.PI);
+            finaltask01.crc2.fillStyle = "black";
+            finaltask01.crc2.fill();
+            finaltask01.crc2.closePath();
+            finaltask01.crc2.beginPath();
+            finaltask01.crc2.arc(this.x, this.y + 30 / 6, 30 / 3, 0.2 * Math.PI, 0.8 * Math.PI);
+            finaltask01.crc2.strokeStyle = "black";
+            finaltask01.crc2.lineWidth = 3;
+            finaltask01.crc2.stroke();
+            finaltask01.crc2.closePath();
+            finaltask01.crc2.restore();
         }
         createButton() {
             let assignbutton = document.createElement("button");
@@ -48,37 +75,7 @@ var finaltask01;
     }
     finaltask01.Visitor = Visitor;
     class happyvisitor extends Visitor {
-        constructor(x, y, pricetopay) {
-            super(x, y, pricetopay);
-        }
         drawvisitor() {
-            finaltask01.crc2.save();
-            finaltask01.crc2.translate(this.x, this.y);
-            finaltask01.crc2.beginPath();
-            finaltask01.crc2.arc(this.x, this.y, 30, 0, 2 * Math.PI);
-            finaltask01.crc2.fillStyle = "lightgreen";
-            finaltask01.crc2.fill();
-            finaltask01.crc2.strokeStyle = "black";
-            finaltask01.crc2.lineWidth = 1;
-            finaltask01.crc2.stroke();
-            finaltask01.crc2.closePath();
-            finaltask01.crc2.beginPath();
-            finaltask01.crc2.arc(this.x - 30 / 3, this.y - 30 / 6, 30 / 8, 0, 2 * Math.PI);
-            finaltask01.crc2.fillStyle = "black";
-            finaltask01.crc2.fill();
-            finaltask01.crc2.closePath();
-            finaltask01.crc2.beginPath();
-            finaltask01.crc2.arc(this.x + 30 / 3, this.y - 30 / 6, 30 / 8, 0, 2 * Math.PI);
-            finaltask01.crc2.fillStyle = "black";
-            finaltask01.crc2.fill();
-            finaltask01.crc2.closePath();
-            finaltask01.crc2.beginPath();
-            finaltask01.crc2.arc(this.x, this.y + 30 / 6, 30 / 3, 0.2 * Math.PI, 0.8 * Math.PI);
-            finaltask01.crc2.strokeStyle = "black";
-            finaltask01.crc2.lineWidth = 3;
-            finaltask01.crc2.stroke();
-            finaltask01.crc2.closePath();
-            finaltask01.crc2.restore();
         }
         ;
     }

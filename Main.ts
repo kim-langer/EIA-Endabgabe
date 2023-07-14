@@ -19,7 +19,7 @@ namespace finaltask01 {
     export let backgroundCanvas: HTMLCanvasElement;
     export let backgroundContext: CanvasRenderingContext2D;
     let editbutton: HTMLButtonElement;
-   let startbutton: HTMLButtonElement;
+    let startbutton: HTMLButtonElement;
 
     function handleLoad(_event: Event): void {
 
@@ -52,8 +52,8 @@ namespace finaltask01 {
 
     // Eisgame starten 
     function startgame() {
-        let happyVisitor = new happyvisitor(1170, 200, 0);
-        happyVisitor.drawvisitor();
+        let newVisitor = new Visitor(1170, 200, 0, 0);
+        newVisitor.drawvisitor();
     };
 
 

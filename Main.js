@@ -35,8 +35,8 @@ var finaltask01;
     let eissorten = []; // Array zur Speicherung der Eissorten
     // Eisgame starten 
     function startgame() {
-        let happyVisitor = new finaltask01.happyvisitor(1170, 200, 0);
-        happyVisitor.drawvisitor();
+        let newVisitor = new finaltask01.Visitor(1170, 200, 0, 0);
+        newVisitor.drawvisitor();
     }
     ;
     // Der "Add a new Ice Cream Button"
