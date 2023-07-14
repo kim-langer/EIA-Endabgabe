@@ -86,12 +86,11 @@ var finaltask01;
             }
         }
         showOrderButton() {
-            // Erstelle den Button
             let vieworderbutton = document.createElement("button");
             vieworderbutton.innerText = "View Order";
             vieworderbutton.id = "vieworderbutton";
-            vieworderbutton.style.left = `${this.x}px`;
-            vieworderbutton.style.top = `${this.y}px`;
+            vieworderbutton.style.left = `${this.x}`;
+            vieworderbutton.style.top = `${this.y}`;
             vieworderbutton.addEventListener("click", () => {
                 this.showandfulfillOrder();
                 vieworderbutton.remove();
@@ -101,17 +100,18 @@ var finaltask01;
         showandfulfillOrder() {
             let fulfillOrderContainer = document.getElementById("fulfillorder-container");
             fulfillOrderContainer.classList.add("visible");
-            // Bestellung anzeigen
-            let orderText = document.createElement("p");
-            orderText.innerText = "Order: " + this.order.name + " Price: " + this.order.preis.toFixed(2) + " €";
-            fulfillOrderContainer.appendChild(orderText);
+            let selectHTML = '<select id="type-input">';
+            for (let i = 0; i < finaltask01.eissorten.length; i++) {
+                selectHTML += '<option value="' + finaltask01.eissorten[i].name + '">' + finaltask01.eissorten[i].name + '</option>';
+            }
+            selectHTML += '</select>';
             let orderHTML = `
-          <select id="type-input">
-            <option value=" ">Flavour</option>
-            <option value=" ">Topping</option>
-          </select>
-          <button id="addbutton" type="submit">Fulfill Order</button>
-        </div>
+        <p class="order-text">Please create this ice cream: ${this.order.name}</p>
+        <br> 
+        <p>Price: ${this.order.preis.toFixed(2)} €</p>
+        <br>
+        ${selectHTML}
+        <button id="addbutton" type="submit">Fulfill Order</button>
       `;
             fulfillOrderContainer.innerHTML = orderHTML;
         }
