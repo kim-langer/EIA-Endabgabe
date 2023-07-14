@@ -39,21 +39,19 @@ namespace finaltask01 {
         drawstandingDesk(backgroundContext, { x: 670, y: 600 }, 50)
         drawstandingDesk(backgroundContext, { x: 300, y: 640 }, 50)
 
-        drawSmiley(backgroundContext, { x: 1170, y: 1170 }, 30)
-
         createEditButton();
         createStartButton();
         drawEarnings();
-        startgame();
 
     };
 
-    let eissorten: IceCream[] = []; // Array zur Speicherung der Eissorten
+    export let eissorten: IceCream[] = []; // Array zur Speicherung der Eissorten
 
     // Eisgame starten 
     function startgame() {
-        let newVisitor = new Visitor(1170, 200, 0, 0);
+        let newVisitor = new Visitor(565, 62, 0, 0);
         newVisitor.drawvisitor();
+        newVisitor.createButton();
     };
 
 
@@ -153,6 +151,8 @@ namespace finaltask01 {
         startbutton.id = "start-button"
 
         document.body.appendChild(startbutton);
+
+        startbutton.addEventListener ("click", startgame)
     }
 
     // Funktionen für das Berechnen und Anzeigen der Einnahmen

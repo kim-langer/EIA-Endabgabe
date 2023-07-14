@@ -25,18 +25,17 @@ var finaltask01;
         drawstandingDesk(finaltask01.backgroundContext, { x: 940, y: 600 }, 50);
         drawstandingDesk(finaltask01.backgroundContext, { x: 670, y: 600 }, 50);
         drawstandingDesk(finaltask01.backgroundContext, { x: 300, y: 640 }, 50);
-        drawSmiley(finaltask01.backgroundContext, { x: 1170, y: 1170 }, 30);
         createEditButton();
         createStartButton();
         drawEarnings();
-        startgame();
     }
     ;
-    let eissorten = []; // Array zur Speicherung der Eissorten
+    finaltask01.eissorten = []; // Array zur Speicherung der Eissorten
     // Eisgame starten 
     function startgame() {
-        let newVisitor = new finaltask01.Visitor(1170, 200, 0, 0);
+        let newVisitor = new finaltask01.Visitor(565, 62, 0, 0);
         newVisitor.drawvisitor();
+        newVisitor.createButton();
     }
     ;
     // Der "Add a new Ice Cream Button"
@@ -89,11 +88,11 @@ var finaltask01;
         let isFlavour = typeInput.value === "flavour";
         if (isFlavour) {
             let eissorte = new finaltask01.IceCream(name, preis, color);
-            eissorten.push(eissorte);
+            finaltask01.eissorten.push(eissorte);
         }
         else {
             let topping = new finaltask01.Topping(name, preis, color);
-            eissorten.push(topping);
+            finaltask01.eissorten.push(topping);
         }
         // Formular zurücksetzen
         nameInput.value = "";
@@ -110,7 +109,7 @@ var finaltask01;
     <p>Color: ${color}</p>
   `;
         icecreamSelectionDiv.appendChild(newicecream);
-        console.log(eissorten);
+        console.log(finaltask01.eissorten);
     }
     // Button zum Spiel starten
     function createStartButton() {
@@ -118,6 +117,7 @@ var finaltask01;
         startbutton.innerHTML = "Open the ice cafe for visitors";
         startbutton.id = "start-button";
         document.body.appendChild(startbutton);
+        startbutton.addEventListener("click", startgame);
     }
     // Funktionen für das Berechnen und Anzeigen der Einnahmen
     function drawEarnings() {

@@ -81,17 +81,21 @@ top: 230;
 
 #assign-button {
     position: absolute;
-    left: 750px;
-    top: 70px;
-    padding: 10px 20px;
-    font-size: 14px;
+    left: 1080px;
+    top: 170px;
+    padding: 5px 10px;
+    font-size: 12px;
     font-weight: bold;
     text-align: center;
     text-decoration: none;
-    background-color: #29afe9;
+    background-color: #91267c;
     color: #fff;
     border: none;
     border-radius: 20px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+ }
+
+ #assign-button:hover {
+    background-color: #72c657;
  }
