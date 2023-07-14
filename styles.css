@@ -99,3 +99,20 @@ top: 230;
  #assign-button:hover {
     background-color: #72c657;
  }
+
+ #vieworderbutton {
+    position: absolute;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    background-color: #4da9dd;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+ }
+
+ 

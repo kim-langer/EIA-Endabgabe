@@ -11,6 +11,8 @@ var finaltask01;
         y;
         mood;
         pricetopay;
+        order;
+        receiptButton;
         constructor(x, y, pricetopay, mood) {
             this.x = x;
             this.y = y;
@@ -77,29 +79,28 @@ var finaltask01;
         }
         ordericecream() {
             // Wähle eine zufällige Eissorte
-            let randomIndex = Math.floor(Math.random() * finaltask01.eissorten.length);
-            let chosenIceCream = finaltask01.eissorten[randomIndex];
+            let generateOrder = Math.floor(Math.random() * finaltask01.eissorten.length);
+            let chosenIceCream = finaltask01.eissorten[generateOrder];
             // Erstelle eine Bestellung mit der gewählten Eissorte
-            this.order = new IceCreamOrder(chosenIceCream);
+            this.order = (chosenIceCream);
         }
         ;
         showOrderButton() {
             // Erstelle den Button
-            let button = document.createElement("button");
-            button.innerText = "View Order";
-            button.addEventListener("click", () => {
-                this.showOrder();
+            let vieworderbutton = document.createElement("button");
+            vieworderbutton.innerText = "View Order";
+            vieworderbutton.id = "vieworderbutton";
+            vieworderbutton.style.left = `${this.x}px`;
+            vieworderbutton.style.top = `${this.y}px`;
+            vieworderbutton.addEventListener("click", () => {
+                this.showandfulfillOrder();
             });
-            // Positioniere den Button
-            button.style.position = "absolute";
-            button.style.left = `${this.x - 50}px`;
-            button.style.top = `${this.y + 50}px`;
-            // Füge den Button dem Dokument hinzu
-            document.body.appendChild(button);
+            document.body.appendChild(vieworderbutton);
             // Speichere eine Referenz auf den Button
-            this.receiptButton = button;
+            this.receiptButton = vieworderbutton;
         }
-        showOrder() {
+        showandfulfillOrder() {
+            let vieworderbutton = document.querySelector("#vieworderbutton");
             // Überprüfe, ob eine Bestellung vorhanden ist
             if (this.order) {
                 // Zeige die Bestellung an
