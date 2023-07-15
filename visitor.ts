@@ -12,7 +12,6 @@ namespace finaltask01 {
     mood: MoodVisitor;
     pricetopay: number;
     order: IceCream | null;
-    receiptButton: HTMLButtonElement | null;
 
 
     constructor(x: number, y: number, pricetopay: number, mood: MoodVisitor) {
@@ -121,13 +120,13 @@ namespace finaltask01 {
     showandfulfillOrder(): void {
       let fulfillOrderContainer = document.getElementById("fulfillorder-container") as HTMLDivElement;
       fulfillOrderContainer.classList.add("visible");
-
-      let selectHTML = '<select id="type-input">';
+    
+      let selectHTML = '<select id="eissorten-input">';
       for (let i = 0; i < eissorten.length; i++) {
         selectHTML += '<option value="' + eissorten[i].name + '">' + eissorten[i].name + '</option>';
       }
       selectHTML += '</select>';
-
+    
       let orderHTML = `
         <p class="order-text">Please create this ice cream</p>
         <br> 
@@ -135,25 +134,50 @@ namespace finaltask01 {
         <p>Price: ${this.order.preis.toFixed(2)} €</p>
         <br>
         ${selectHTML}
-        <button id="addbutton" type="submit">Fulfill Order</button>
+        <button id="chooseicecreambutton">Create the ice cream</button>
       `;
-
+    
       fulfillOrderContainer.innerHTML = orderHTML;
-
+    
       let iceCream = new IceCream(this.order.name, this.order.preis, this.order.color);
       iceCream.drawwaffle();
-
-
-    // Button zum Schließen des Divs
-    let completeOrderButton = document.createElement("button");
-    completeOrderButton.innerText = "Complete Order";
-    completeOrderButton.addEventListener("click", () => {
-      fulfillOrderContainer.innerHTML = ""; // Div leeren, um es zu schließen
-    });
-    fulfillOrderContainer.appendChild(completeOrderButton);
-  }
+    
+      // Button zum Erstellen der Eiscremes
+      let chooseIceCreamButton = document.getElementById("chooseicecreambutton");
+      chooseIceCreamButton.addEventListener("click", () => {
+        this.drawiceball();
+      });
+      fulfillOrderContainer.appendChild(chooseIceCreamButton);
+    
+      // Button zum Schließen des Divs
+      let completeOrderButton = document.createElement("button");
+      completeOrderButton.innerText = "Complete Order";
+      completeOrderButton.addEventListener("click", () => {
+        fulfillOrderContainer.innerHTML = ""; // Div leeren, um es zu schließen
+      });
+      fulfillOrderContainer.appendChild(completeOrderButton);
+    }
+    
+    drawiceball (): void {
+      // Eiskugel in ausgewählter Farbe zeichnen
+      let waffleCanvas = document.getElementById("waffle-canvas") as HTMLCanvasElement;
+      let waffleContext = waffleCanvas.getContext("2d");
+      let ballRadius = 30; 
+    
+      waffleContext.beginPath();
+      waffleContext.arc(385, 295, ballRadius, 0, 2 * Math.PI);
+      waffleContext.fillStyle = this.order.color; 
+      waffleContext.fill();
+    
+      let fulfillOrderContainer = document.getElementById("fulfillorder-container") as HTMLDivElement;
+      fulfillOrderContainer.appendChild(waffleCanvas);
     }
 
+    getreciept (): void {
+     
+    }
+     
 
+       }
 
-  }
+}

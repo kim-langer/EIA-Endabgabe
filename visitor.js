@@ -12,7 +12,6 @@ var finaltask01;
         mood;
         pricetopay;
         order;
-        receiptButton;
         constructor(x, y, pricetopay, mood) {
             this.x = x;
             this.y = y;
@@ -100,7 +99,7 @@ var finaltask01;
         showandfulfillOrder() {
             let fulfillOrderContainer = document.getElementById("fulfillorder-container");
             fulfillOrderContainer.classList.add("visible");
-            let selectHTML = '<select id="type-input">';
+            let selectHTML = '<select id="eissorten-input">';
             for (let i = 0; i < finaltask01.eissorten.length; i++) {
                 selectHTML += '<option value="' + finaltask01.eissorten[i].name + '">' + finaltask01.eissorten[i].name + '</option>';
             }
@@ -112,11 +111,17 @@ var finaltask01;
         <p>Price: ${this.order.preis.toFixed(2)} €</p>
         <br>
         ${selectHTML}
-        <button id="addbutton" type="submit">Fulfill Order</button>
+        <button id="chooseicecreambutton">Create the ice cream</button>
       `;
             fulfillOrderContainer.innerHTML = orderHTML;
             let iceCream = new finaltask01.IceCream(this.order.name, this.order.preis, this.order.color);
             iceCream.drawwaffle();
+            // Button zum Erstellen der Eiscremes
+            let chooseIceCreamButton = document.getElementById("chooseicecreambutton");
+            chooseIceCreamButton.addEventListener("click", () => {
+                this.drawiceball();
+            });
+            fulfillOrderContainer.appendChild(chooseIceCreamButton);
             // Button zum Schließen des Divs
             let completeOrderButton = document.createElement("button");
             completeOrderButton.innerText = "Complete Order";
@@ -124,6 +129,20 @@ var finaltask01;
                 fulfillOrderContainer.innerHTML = ""; // Div leeren, um es zu schließen
             });
             fulfillOrderContainer.appendChild(completeOrderButton);
+        }
+        drawiceball() {
+            // Eiskugel in ausgewählter Farbe zeichnen
+            let waffleCanvas = document.getElementById("waffle-canvas");
+            let waffleContext = waffleCanvas.getContext("2d");
+            let ballRadius = 30;
+            waffleContext.beginPath();
+            waffleContext.arc(385, 295, ballRadius, 0, 2 * Math.PI);
+            waffleContext.fillStyle = this.order.color;
+            waffleContext.fill();
+            let fulfillOrderContainer = document.getElementById("fulfillorder-container");
+            fulfillOrderContainer.appendChild(waffleCanvas);
+        }
+        getreciept() {
         }
     }
     finaltask01.Visitor = Visitor;
