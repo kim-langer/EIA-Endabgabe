@@ -46,6 +46,7 @@ namespace finaltask01 {
     };
 
     export let eissorten: IceCream[] = []; // Array zur Speicherung der Eissorten
+    export let toppings: Topping[] = []; // Array zur Speicherung der Toppings
 
     // Hinweis auf fehlende Eissorten
     function showAlert(): void {
@@ -85,8 +86,8 @@ namespace finaltask01 {
 
         let InputHtml = `
         <div class="input-container">
-          <label for="text-input">New flavor:</label>
-          <input type="text" id="text-input" placeholder="Name your new flavor">
+          <label for="text-input">New flavor or topping:</label>
+          <input type="text" id="text-input" placeholder="Yum yum">
           <label for="price-input">Price:</label>
           <input type="number" id="price-input" placeholder="What should it cost?">
           <label for="color-input">Choose a color</label>
@@ -111,13 +112,13 @@ namespace finaltask01 {
     // Neues Eisangebot im Array speichern
     function handleFormSubmit(_event: Event) {
         _event.preventDefault();
-
+    
         // Formulardaten abrufen
         let nameInput = document.getElementById("text-input") as HTMLInputElement;
         let priceInput = document.getElementById("price-input") as HTMLInputElement;
         let colorInput = document.getElementById("color-input") as HTMLInputElement;
         let typeInput = document.getElementById("type-input") as HTMLSelectElement;
-
+    
         // Neue Eissorte oder neues Topping erstellen
         let name = nameInput.value;
         let preis = parseFloat(priceInput.value);
@@ -129,28 +130,36 @@ namespace finaltask01 {
             eissorten.push(eissorte);
         } else {
             let topping = new Topping(name, preis, color);
-            eissorten.push(topping);
+            toppings.push(topping);
         }
-
+    
         // Formular zurücksetzen
         nameInput.value = "";
         priceInput.value = "";
         colorInput.value = "";
         typeInput.value = "flavour";
-
+    
         editContainer.classList.remove("visible");
-
-        // Daten im HTML-Div "icecreamselection" darstellen
-        let icecreamSelectionDiv = document.getElementById("icecreamselection");
+    
+        let iceCreamSelection = document.getElementById("icecreamselection");
+    
         let newicecream = document.createElement("div");
-        icecreamSelectionDiv.innerHTML = `
-    <p>Name: ${name}</p>
-    <p>Price: ${preis.toFixed(2)} €</p>
-    <p>Color: ${color}</p>
-  `;
-        icecreamSelectionDiv.appendChild(newicecream);
+        newicecream.id = "newicecream"
+        newicecream.style.left = `${100+ eissorten.length * 100}px`;
+        newicecream.style.top = isFlavour ? "230px" : "300px";
+        newicecream.style.backgroundColor = color;
+    
+        let text = document.createElement("p");
+        text.innerText = name;
+        text.style.position = "relative";
+        text.style.color = "white";
+        newicecream.appendChild(text);
+        
+        // neue Eissorte zum HTML-Div hinzufügen
+        iceCreamSelection.appendChild(newicecream);
+        
         console.log(eissorten);
-    }
+    }    
 
 
     // Button zum Spiel starten
@@ -236,39 +245,5 @@ namespace finaltask01 {
 
         crc2.restore();
     };
-
-    function drawSmiley(crc2: CanvasRenderingContext2D, _position: Vector, _radius: number): void {
-        // Gesicht
-        crc2.beginPath();
-        crc2.arc(_position.x, _position.y, _radius, 0, 2 * Math.PI);
-        crc2.fillStyle = "lightgreen";
-        crc2.fill();
-        crc2.strokeStyle = "black";
-        crc2.lineWidth = 1;
-        crc2.stroke();
-        crc2.closePath();
-
-        // Augen
-        crc2.beginPath();
-        crc2.arc(_position.x - _radius / 3, _position.y - _radius / 6, _radius / 8, 0, 2 * Math.PI);
-        crc2.fillStyle = "black";
-        crc2.fill();
-        crc2.closePath();
-
-        crc2.beginPath();
-        crc2.arc(_position.x + _radius / 3, _position.y - _radius / 6, _radius / 8, 0, 2 * Math.PI);
-        crc2.fillStyle = "black";
-        crc2.fill();
-        crc2.closePath();
-
-        // Mund
-        crc2.beginPath();
-        crc2.arc(_position.x, _position.y + _radius / 6, _radius / 3, 0.2 * Math.PI, 0.8 * Math.PI);
-        crc2.strokeStyle = "black";
-        crc2.lineWidth = 3;
-        crc2.stroke();
-        crc2.closePath();
-    }
-
 
 }

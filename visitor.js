@@ -106,14 +106,24 @@ var finaltask01;
             }
             selectHTML += '</select>';
             let orderHTML = `
-        <p class="order-text">Please create this ice cream: ${this.order.name}</p>
+        <p class="order-text">Please create this ice cream</p>
         <br> 
+        <p>${this.order.name}</p>
         <p>Price: ${this.order.preis.toFixed(2)} €</p>
         <br>
         ${selectHTML}
         <button id="addbutton" type="submit">Fulfill Order</button>
       `;
             fulfillOrderContainer.innerHTML = orderHTML;
+            let iceCream = new finaltask01.IceCream(this.order.name, this.order.preis, this.order.color);
+            iceCream.drawwaffle();
+            // Button zum Schließen des Divs
+            let completeOrderButton = document.createElement("button");
+            completeOrderButton.innerText = "Complete Order";
+            completeOrderButton.addEventListener("click", () => {
+                fulfillOrderContainer.innerHTML = ""; // Div leeren, um es zu schließen
+            });
+            fulfillOrderContainer.appendChild(completeOrderButton);
         }
     }
     finaltask01.Visitor = Visitor;

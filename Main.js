@@ -31,6 +31,7 @@ var finaltask01;
     }
     ;
     finaltask01.eissorten = []; // Array zur Speicherung der Eissorten
+    finaltask01.toppings = []; // Array zur Speicherung der Toppings
     // Hinweis auf fehlende Eissorten
     function showAlert() {
         alert("Please fill the ice cream counter before you start the game!");
@@ -62,8 +63,8 @@ var finaltask01;
         editContainer.classList.add("visible");
         let InputHtml = `
         <div class="input-container">
-          <label for="text-input">New flavor:</label>
-          <input type="text" id="text-input" placeholder="Name your new flavor">
+          <label for="text-input">New flavor or topping:</label>
+          <input type="text" id="text-input" placeholder="Yum yum">
           <label for="price-input">Price:</label>
           <input type="number" id="price-input" placeholder="What should it cost?">
           <label for="color-input">Choose a color</label>
@@ -100,7 +101,7 @@ var finaltask01;
         }
         else {
             let topping = new finaltask01.Topping(name, preis, color);
-            finaltask01.eissorten.push(topping);
+            finaltask01.toppings.push(topping);
         }
         // Formular zurücksetzen
         nameInput.value = "";
@@ -108,15 +109,19 @@ var finaltask01;
         colorInput.value = "";
         typeInput.value = "flavour";
         editContainer.classList.remove("visible");
-        // Daten im HTML-Div "icecreamselection" darstellen
-        let icecreamSelectionDiv = document.getElementById("icecreamselection");
+        let iceCreamSelection = document.getElementById("icecreamselection");
         let newicecream = document.createElement("div");
-        icecreamSelectionDiv.innerHTML = `
-    <p>Name: ${name}</p>
-    <p>Price: ${preis.toFixed(2)} €</p>
-    <p>Color: ${color}</p>
-  `;
-        icecreamSelectionDiv.appendChild(newicecream);
+        newicecream.id = "newicecream";
+        newicecream.style.left = `${100 + finaltask01.eissorten.length * 100}px`;
+        newicecream.style.top = isFlavour ? "230px" : "300px";
+        newicecream.style.backgroundColor = color;
+        let text = document.createElement("p");
+        text.innerText = name;
+        text.style.position = "relative";
+        text.style.color = "white";
+        newicecream.appendChild(text);
+        // neue Eissorte zum HTML-Div hinzufügen
+        iceCreamSelection.appendChild(newicecream);
         console.log(finaltask01.eissorten);
     }
     // Button zum Spiel starten
@@ -188,34 +193,5 @@ var finaltask01;
         crc2.restore();
     }
     ;
-    function drawSmiley(crc2, _position, _radius) {
-        // Gesicht
-        crc2.beginPath();
-        crc2.arc(_position.x, _position.y, _radius, 0, 2 * Math.PI);
-        crc2.fillStyle = "lightgreen";
-        crc2.fill();
-        crc2.strokeStyle = "black";
-        crc2.lineWidth = 1;
-        crc2.stroke();
-        crc2.closePath();
-        // Augen
-        crc2.beginPath();
-        crc2.arc(_position.x - _radius / 3, _position.y - _radius / 6, _radius / 8, 0, 2 * Math.PI);
-        crc2.fillStyle = "black";
-        crc2.fill();
-        crc2.closePath();
-        crc2.beginPath();
-        crc2.arc(_position.x + _radius / 3, _position.y - _radius / 6, _radius / 8, 0, 2 * Math.PI);
-        crc2.fillStyle = "black";
-        crc2.fill();
-        crc2.closePath();
-        // Mund
-        crc2.beginPath();
-        crc2.arc(_position.x, _position.y + _radius / 6, _radius / 3, 0.2 * Math.PI, 0.8 * Math.PI);
-        crc2.strokeStyle = "black";
-        crc2.lineWidth = 3;
-        crc2.stroke();
-        crc2.closePath();
-    }
 })(finaltask01 || (finaltask01 = {}));
 //# sourceMappingURL=Main.js.map

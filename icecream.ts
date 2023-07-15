@@ -10,30 +10,31 @@ namespace finaltask01 {
       this.preis = preis;
       this.color = color;
     }
-    drawicecream():void  {
+    drawwaffle():void  {
       let canvas = document.createElement("canvas");
-      canvas.width = 200;
-      canvas.height = 200;
+      canvas.width = 500;
+      canvas.height = 500;
       let context = canvas.getContext("2d");
+    
+      // Zeichne die Waffel auf dem Canvas
+      let xOffset = 350; // Abstand zum linken Rand
+      let yOffset = 250; // Abstand zum oberen Rand
+      let waffleWidth = 70; // Breite der Waffel
+      let waffleHeight = 90; // Höhe der Waffel
+    
+      context.beginPath();
+      context.moveTo(xOffset + waffleWidth / 2, yOffset + waffleHeight);
+      context.lineTo(xOffset, yOffset);
+      context.lineTo(xOffset + waffleWidth, yOffset);
+      context.closePath();
+      context.fillStyle = "#d2a86c"; // Farbe der Waffel
+      context.fill();
 
-    // Zeichne die Waffel
-    crc2.beginPath();
-    crc2.moveTo(100, 0);
-    crc2.lineTo(0, 200);
-    crc2.lineTo(200, 200);
-    crc2.closePath();
-    crc2.fillStyle = "#d2a86c"; // Farbe der Waffel
-    crc2.fill();
-
-    // Zeichne die Kugel
-    crc2.beginPath();
-    crc2.arc(100, 100, 80, 0, 2 * Math.PI);
-    crc2.fillStyle = this.color; // Farbe der Kugel
-    crc2.fill();
-
-    // Füge das Canvas dem DOM hinzu
-    // Beispiel: document.body.appendChild(canvas);
+      let fulfillOrderContainer = document.getElementById("fulfillorder-container") as HTMLDivElement;
+      fulfillOrderContainer.appendChild(canvas);
     };
+
+    drawflavour():void  {};
 
   }
 

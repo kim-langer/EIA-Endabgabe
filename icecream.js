@@ -9,27 +9,28 @@ var finaltask01;
             this.preis = preis;
             this.color = color;
         }
-        drawicecream() {
+        drawwaffle() {
             let canvas = document.createElement("canvas");
-            canvas.width = 200;
-            canvas.height = 200;
+            canvas.width = 500;
+            canvas.height = 500;
             let context = canvas.getContext("2d");
-            // Zeichne die Waffel
-            finaltask01.crc2.beginPath();
-            finaltask01.crc2.moveTo(100, 0);
-            finaltask01.crc2.lineTo(0, 200);
-            finaltask01.crc2.lineTo(200, 200);
-            finaltask01.crc2.closePath();
-            finaltask01.crc2.fillStyle = "#d2a86c"; // Farbe der Waffel
-            finaltask01.crc2.fill();
-            // Zeichne die Kugel
-            finaltask01.crc2.beginPath();
-            finaltask01.crc2.arc(100, 100, 80, 0, 2 * Math.PI);
-            finaltask01.crc2.fillStyle = this.color; // Farbe der Kugel
-            finaltask01.crc2.fill();
-            // Füge das Canvas dem DOM hinzu
-            // Beispiel: document.body.appendChild(canvas);
+            // Zeichne die Waffel auf dem Canvas
+            let xOffset = 350; // Abstand zum linken Rand
+            let yOffset = 250; // Abstand zum oberen Rand
+            let waffleWidth = 70; // Breite der Waffel
+            let waffleHeight = 90; // Höhe der Waffel
+            context.beginPath();
+            context.moveTo(xOffset + waffleWidth / 2, yOffset + waffleHeight);
+            context.lineTo(xOffset, yOffset);
+            context.lineTo(xOffset + waffleWidth, yOffset);
+            context.closePath();
+            context.fillStyle = "#d2a86c"; // Farbe der Waffel
+            context.fill();
+            let fulfillOrderContainer = document.getElementById("fulfillorder-container");
+            fulfillOrderContainer.appendChild(canvas);
         }
+        ;
+        drawflavour() { }
         ;
     }
     finaltask01.IceCream = IceCream;

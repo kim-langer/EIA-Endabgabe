@@ -121,27 +121,39 @@ namespace finaltask01 {
     showandfulfillOrder(): void {
       let fulfillOrderContainer = document.getElementById("fulfillorder-container") as HTMLDivElement;
       fulfillOrderContainer.classList.add("visible");
-    
+
       let selectHTML = '<select id="type-input">';
       for (let i = 0; i < eissorten.length; i++) {
         selectHTML += '<option value="' + eissorten[i].name + '">' + eissorten[i].name + '</option>';
       }
       selectHTML += '</select>';
-    
+
       let orderHTML = `
-        <p class="order-text">Please create this ice cream: ${this.order.name}</p>
+        <p class="order-text">Please create this ice cream</p>
         <br> 
+        <p>${this.order.name}</p>
         <p>Price: ${this.order.preis.toFixed(2)} €</p>
         <br>
         ${selectHTML}
         <button id="addbutton" type="submit">Fulfill Order</button>
       `;
-    
+
       fulfillOrderContainer.innerHTML = orderHTML;
+
+      let iceCream = new IceCream(this.order.name, this.order.preis, this.order.color);
+      iceCream.drawwaffle();
+
+
+    // Button zum Schließen des Divs
+    let completeOrderButton = document.createElement("button");
+    completeOrderButton.innerText = "Complete Order";
+    completeOrderButton.addEventListener("click", () => {
+      fulfillOrderContainer.innerHTML = ""; // Div leeren, um es zu schließen
+    });
+    fulfillOrderContainer.appendChild(completeOrderButton);
+  }
     }
-  
+
 
 
   }
-
-} 
