@@ -11,10 +11,9 @@ namespace finaltask01 {
       this.color = color;
     }
     drawwaffle():void  {
-      let canvas = document.createElement("canvas");
-      canvas.width = 500;
-      canvas.height = 500;
-      let context = canvas.getContext("2d");
+      let wafflecanvas = document.createElement("canvas");
+      let context = wafflecanvas.getContext("2d");
+      wafflecanvas.id = "waffle-canvas";
     
       // Zeichne die Waffel auf dem Canvas
       let xOffset = 350; // Abstand zum linken Rand
@@ -31,7 +30,7 @@ namespace finaltask01 {
       context.fill();
 
       let fulfillOrderContainer = document.getElementById("fulfillorder-container") as HTMLDivElement;
-      fulfillOrderContainer.appendChild(canvas);
+      fulfillOrderContainer.appendChild(wafflecanvas);
     };
 
     drawflavour():void  {};

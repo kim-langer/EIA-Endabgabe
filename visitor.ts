@@ -12,6 +12,8 @@ namespace finaltask01 {
     mood: MoodVisitor;
     pricetopay: number;
     order: IceCream | null;
+    receiptButton: HTMLButtonElement | null;
+    paymentConfirmed: boolean;
 
 
     constructor(x: number, y: number, pricetopay: number, mood: MoodVisitor) {
@@ -154,30 +156,59 @@ namespace finaltask01 {
       completeOrderButton.innerText = "Complete Order";
       completeOrderButton.addEventListener("click", () => {
         fulfillOrderContainer.innerHTML = ""; // Div leeren, um es zu schließen
+         // Timer für 10 Sekunden, bevor der "Receipt" Button angezeigt wird
+      setTimeout(() => {
+        this.showReceiptButton();
+      }, 10000);
       });
       fulfillOrderContainer.appendChild(completeOrderButton);
     }
     
     drawiceball (): void {
       // Eiskugel in ausgewählter Farbe zeichnen
-      let waffleCanvas = document.getElementById("waffle-canvas") as HTMLCanvasElement;
-      let waffleContext = waffleCanvas.getContext("2d");
+      let iceballCanvas = document.getElementById("waffle-canvas") as HTMLCanvasElement;
+      let context = iceballCanvas.getContext("2d");
       let ballRadius = 30; 
     
-      waffleContext.beginPath();
-      waffleContext.arc(385, 295, ballRadius, 0, 2 * Math.PI);
-      waffleContext.fillStyle = this.order.color; 
-      waffleContext.fill();
+      context.beginPath();
+      context.arc(385, 295, ballRadius, 0, 2 * Math.PI);
+      context.fillStyle = this.order.color; 
+      context.fill();
     
       let fulfillOrderContainer = document.getElementById("fulfillorder-container") as HTMLDivElement;
-      fulfillOrderContainer.appendChild(waffleCanvas);
+      fulfillOrderContainer.appendChild(iceballCanvas);
     }
 
-    getreciept (): void {
-     
+    showReceiptButton(): void {
+  
+      // Erzeuge den "Receipt" Button
+      let receiptButton = document.createElement("button");
+      receiptButton.innerText = "Receipt";
+      receiptButton.id = "receipt-button";
+      receiptButton.style.display = "none"; // Starte mit ausgeblendeten Button
+      receiptButton.addEventListener("click", () => {
+        this.confirmPayment();
+      });
+  
+      document.body.appendChild(receiptButton);
+      this.receiptButton = receiptButton;
+  
+      // Zeige den Button nach 10 Sekunden an
+      //setTimeout(() => {
+       // this.receiptButton.style.display = "block";
+      //}, 10000);
     }
+  
+    confirmPayment(): void {
+      if (this.receiptButton) {
+        this.receiptButton.remove();
+        this.receiptButton = null;
+        this.paymentConfirmed = true;
+  
+        // Erhöhe die Einnahmen...
+      }
      
 
        }
 
-}
+} }

@@ -10,10 +10,9 @@ var finaltask01;
             this.color = color;
         }
         drawwaffle() {
-            let canvas = document.createElement("canvas");
-            canvas.width = 500;
-            canvas.height = 500;
-            let context = canvas.getContext("2d");
+            let wafflecanvas = document.createElement("canvas");
+            let context = wafflecanvas.getContext("2d");
+            wafflecanvas.id = "waffle-canvas";
             // Zeichne die Waffel auf dem Canvas
             let xOffset = 350; // Abstand zum linken Rand
             let yOffset = 250; // Abstand zum oberen Rand
@@ -27,7 +26,7 @@ var finaltask01;
             context.fillStyle = "#d2a86c"; // Farbe der Waffel
             context.fill();
             let fulfillOrderContainer = document.getElementById("fulfillorder-container");
-            fulfillOrderContainer.appendChild(canvas);
+            fulfillOrderContainer.appendChild(wafflecanvas);
         }
         ;
         drawflavour() { }

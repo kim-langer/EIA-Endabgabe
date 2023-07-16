@@ -46,6 +46,7 @@ canvas {
     display: none;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
+    z-index: 1;
 }
 
 #edit-container.visible {
@@ -172,3 +173,15 @@ top: 230;
     height: 50px;
     
  }
+
+ #fulfillorder-container {
+    position: absolute; /* Positionierung des Containers */
+    z-index: 1; /* Stelle den Container über den anderen Elementen dar */
+  }
+  
+  #waffle-canvas {
+    position: absolute; /* Positionierung des Canvas */
+    width: 500px;
+    height: 500px;
+  }
+  
