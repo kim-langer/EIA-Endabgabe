@@ -72,14 +72,13 @@ canvas {
 
 #start-button:hover {
     background-color: #1c769d;
-
 }
 
 #icecreamselection {
-   left: 170;
-top: 230;
-        width: 500;
-        height: 200;
+    left: 170;
+    top: 230;
+    width: 500;
+    height: 200;
 }
 
 #assign-button {
@@ -97,28 +96,28 @@ top: 230;
     border-radius: 20px;
     cursor: pointer;
     transition: background-color 0.3s ease;
- }
+}
 
- #assign-button:hover {
+#assign-button:hover {
     background-color: #72c657;
- }
+}
 
 #vieworderbutton {
     position: absolute;
-    background-color: #FF6384; 
-    color: #FFFFFF;
+    background-color: #ff6384;
+    color: #ffffff;
     border: none;
-    padding: 10px 20px; 
-    font-size: 16px; 
-    border-radius: 5px; 
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
     cursor: pointer;
-  }
-  
-  #vieworderbutton:hover {
-    background-color: #FF478A;
-  }
-  
-  #fulfillorder-container {
+}
+
+#vieworderbutton:hover {
+    background-color: #ff478a;
+}
+
+#fulfillorder-container {
     position: absolute;
     left: 30%;
     top: 30%;
@@ -131,7 +130,7 @@ top: 230;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     position: absolute;
-    z-index: 1; 
+    z-index: 1;
 }
 
 #fulfillorder-container.visible {
@@ -140,72 +139,93 @@ top: 230;
 
 .order-text {
     text-transform: uppercase;
-   background-image: linear-gradient(
-     -225deg,
-     #231557 0%,
-     #44107a 29%,
-     #ff1361 67%,
-     #fff800 100%
-   );
-   background-size: auto auto;
-   background-clip: border-box;
-   background-size: 200% auto;
-   color: #fff;
-   background-clip: text;
-   -webkit-text-fill-color: transparent;
-   -webkit-background-clip: text;
-   -webkit-text-fill-color: transparent;
-   animation: textclip 2s linear infinite;
-   display: inline-block;
-       font-size: 20px;
- }
- 
- @keyframes textclip {
-   to {
-     background-position: 200% center;
-   }
- }
+    background-image: linear-gradient(-225deg, #231557 0%, #44107a 29%, #ff1361 67%, #fff800 100%);
+    background-size: auto auto;
+    background-clip: border-box;
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 2s linear infinite;
+    display: inline-block;
+    font-size: 20px;
+}
 
- #newicecream {
+@keyframes textclip {
+    to {
+        background-position: 200% center;
+    }
+}
+
+#newicecream {
     text-align: center;
     position: absolute;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     width: 100px;
     height: 50px;
-    
- }
-  
-  #waffle-canvas {
+}
+
+#waffle-canvas {
     position: absolute; /* Positionierung des Canvas */
     width: 500px;
     height: 500px;
     z-index: 1;
-  }
+}
 
-  #chooseicecreambutton {
+#chooseicecreambutton {
     position: relative;
     z-index: 2;
+    background-color: #fff;
+    border: 1px solid #d5d9d9;
+    border-radius: 8px;
+    box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
+    box-sizing: border-box;
+    color: #0f1111;
+}
 
-  }
+#chooseicecreambutton:hover {
+    box-shadow: rgba(249, 255, 255, 0.5) 0 10px 10px 0;
+    background-color: #e0e3e3;
+}
 
-  #completeorderbutton {
-position: relative;
-    z-index: 2;
-
-  }
-  
-  #receipt-button {
+#completeorderbutton {
     position: relative;
-    background-color: #5f6b73; 
-    color: #FFFFFF;
+    z-index: 2;
+    top: 50px;
+    left: -130px;
+    background-color: #ff6384;
+    color: #ffffff;
     border: none;
-    padding: 10px 20px; 
-    font-size: 16px; 
-    border-radius: 5px; 
+    padding: 10px 20px;
+    size: 15px;
+    font-size: 15px;
+    border-radius: 5px;
     cursor: pointer;
-  }
+}
 
-  #receipt-button:hover {
-    background-color: #454d52; 
-  }
+#completeorderbutton:hover {
+    background-color: #ff478a;
+}
+
+#receipt-button {
+    position: relative;
+    background-color: #5f6b73;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#receipt-button:hover {
+    background-color: #454d52;
+}
+
+#creationinput {
+    position: relative;
+    z-index: 2;
+}

@@ -153,21 +153,31 @@ namespace finaltask01 {
       let fulfillOrderContainer = document.getElementById("fulfillorder-container") as HTMLDivElement;
       fulfillOrderContainer.classList.add("visible");
     
-      let selectHTML = '<select id="eissorten-input">';
+      let iceCreamSelectHTML = '<select id="eissorten-input">';
       for (let i = 0; i < eissorten.length; i++) {
-        selectHTML += '<option value="' + eissorten[i].name + '">' + eissorten[i].name + '</option>';
+        iceCreamSelectHTML += '<option value="' + eissorten[i].name + '">' + eissorten[i].name + '</option>';
       }
-
-      selectHTML += '</select>';
+      iceCreamSelectHTML += '</select>';
+    
+      let toppingSelectHTML = '<select id="toppings-input">';
+      for (let i = 0; i < toppings.length; i++) {
+        toppingSelectHTML += '<option value="' + toppings[i].name + '">' + toppings[i].name + '</option>';
+      }
+      toppingSelectHTML += '</select>';
     
       let orderHTML = `
-        <p class="order-text">Please create this ice cream</p>
-        <br> 
-        <p>${this.order.name}</p>
-        <p>Price: ${this.order.preis.toFixed(2)} €</p>
-        <br>
-        ${selectHTML}
-        <br>
+        <div id="creationinput">
+          <p class="order-text">Please create this ice cream</p>
+          <br> 
+          <p>${this.order.name}</p>
+          <p>Price: ${this.order.preis.toFixed(2)} €</p>
+          <br>
+          <label for="eissorten-input">Select Ice Cream:</label>
+          ${iceCreamSelectHTML}
+          <br>
+          <label for="toppings-input">Select Topping:</label>
+          ${toppingSelectHTML}
+        </div>
         <button id="chooseicecreambutton">Create the ice cream</button>
       `;
     
@@ -188,29 +198,32 @@ namespace finaltask01 {
       completeOrderButton.id = "completeorderbutton";
       completeOrderButton.innerText = "Complete Order";
       completeOrderButton.addEventListener("click", () => {
-        fulfillOrderContainer.remove();
-         // Timer für 8 Sekunden, bevor der "Receipt" Button angezeigt wird (quasi die Zeit, in der das Eis gegessen wird)
-      setTimeout(() => {
-        this.showReceiptButton();
-      }, 8000);
+        fulfillOrderContainer.classList.remove("visible");
+        // Timer für 8 Sekunden, bevor der "Receipt" Button angezeigt wird (quasi die Zeit, in der das Eis gegessen wird)
+        setTimeout(() => {
+          this.showReceiptButton();
+        }, 8000);
       });
       fulfillOrderContainer.appendChild(completeOrderButton);
     }
     
-    drawiceball (): void {
+    
+    drawiceball(): void {
       // Eiskugel in ausgewählter Farbe zeichnen
       let iceballCanvas = document.getElementById("waffle-canvas") as HTMLCanvasElement;
       let context = iceballCanvas.getContext("2d");
-      let ballRadius = 30; 
+      let ballRadius = 30;
+      let xOffset = 230; // Abstand zum linken Rand
+      let yOffset = 50; // Abstand zum oberen Rand
     
       context.beginPath();
-      context.arc(385, 295, ballRadius, 0, 2 * Math.PI);
-      context.fillStyle = this.order.color; 
+      context.arc(this.x + xOffset, this.y + yOffset, ballRadius, 0, 2 * Math.PI);
+      context.fillStyle = this.order.color;
       context.fill();
     
       let fulfillOrderContainer = document.getElementById("fulfillorder-container") as HTMLDivElement;
       fulfillOrderContainer.appendChild(iceballCanvas);
-    }
+    }    
 
     showReceiptButton(): void {
       let receiptButton = document.createElement("button");
@@ -236,6 +249,8 @@ namespace finaltask01 {
         this.receiptButton.remove();
         this.receiptButton = null;
         this.paymentConfirmed = true;
+
+        console.log("Costumer payed and left")
       }
     
 

@@ -14,10 +14,10 @@ var finaltask01;
             let context = wafflecanvas.getContext("2d");
             wafflecanvas.id = "waffle-canvas";
             // Zeichne die Waffel auf dem Canvas
-            let xOffset = 350; // Abstand zum linken Rand
-            let yOffset = 250; // Abstand zum oberen Rand
-            let waffleWidth = 70; // Breite der Waffel
-            let waffleHeight = 90; // Höhe der Waffel
+            let xOffset = 230; // Abstand zum linken Rand
+            let yOffset = 70; // Abstand zum oberen Rand
+            let waffleWidth = 50; // Breite der Waffel
+            let waffleHeight = 40; // Höhe der Waffel
             context.beginPath();
             context.moveTo(xOffset + waffleWidth / 2, yOffset + waffleHeight);
             context.lineTo(xOffset, yOffset);
