@@ -72,7 +72,7 @@ var finaltask01;
     }
     // Interaktion mit dem Edit Button (ermöglicht Bearbeiten des Eisangebots)
     let editContainer = document.getElementById("edit-container");
-    function handleEditButtonClick(event) {
+    function handleEditButtonClick(_event) {
         event.preventDefault();
         editContainer = document.getElementById("edit-container");
         editContainer.classList.add("visible");
@@ -138,6 +138,7 @@ var finaltask01;
         // neue Eissorte zum HTML-Div hinzufügen
         iceCreamSelection.appendChild(newicecream);
         console.log(finaltask01.eissorten);
+        console.log(finaltask01.toppings);
     }
     // Button zum Spiel starten
     function createStartButton() {
@@ -147,13 +148,24 @@ var finaltask01;
         document.body.appendChild(startbutton);
         startbutton.addEventListener("click", startgame);
     }
+    finaltask01.currentEarnings = 0;
+    function getCurrentEarnings() {
+        return finaltask01.currentEarnings;
+    }
+    finaltask01.getCurrentEarnings = getCurrentEarnings;
+    function updateCurrentEarnings(earnings) {
+        finaltask01.currentEarnings += earnings;
+        drawEarnings();
+    }
+    finaltask01.updateCurrentEarnings = updateCurrentEarnings;
     // Funktionen für das Berechnen und Anzeigen der Einnahmen
     function drawEarnings() {
+        finaltask01.crc2.clearRect(0, 0, finaltask01.canvas.width, 50);
         finaltask01.crc2.fillStyle = "black";
         finaltask01.crc2.font = "bold 16px Arial";
-        finaltask01.crc2.fillText("Your Earnings:", 20, 40);
+        finaltask01.crc2.fillText("Your Earnings: " + finaltask01.currentEarnings.toFixed(2) + " €", 20, 40);
     }
-    ;
+    finaltask01.drawEarnings = drawEarnings;
     // Hintergrundfarbe zeichnen
     function drawBackground(crc2) {
         crc2.fillStyle = "#E8DCCA";

@@ -99,7 +99,7 @@ namespace finaltask01 {
     // Interaktion mit dem Edit Button (ermöglicht Bearbeiten des Eisangebots)
     let editContainer = document.getElementById("edit-container");
 
-    function handleEditButtonClick(event: Event): void {
+    function handleEditButtonClick(_event: Event): void {
         event.preventDefault();
         editContainer = document.getElementById("edit-container") as HTMLDivElement;
         editContainer.classList.add("visible");
@@ -179,6 +179,7 @@ namespace finaltask01 {
         iceCreamSelection.appendChild(newicecream);
         
         console.log(eissorten);
+        console.log(toppings);
     }    
 
 
@@ -193,12 +194,23 @@ namespace finaltask01 {
         startbutton.addEventListener ("click", startgame)
     }
 
+   export let currentEarnings: number = 0;
+
+   export function getCurrentEarnings(): number {
+        return currentEarnings;
+      }
+    export function updateCurrentEarnings(earnings: number): void {
+        currentEarnings += earnings;
+        drawEarnings();
+      }      
+
     // Funktionen für das Berechnen und Anzeigen der Einnahmen
-    function drawEarnings(): void {
+    export function drawEarnings(): void {
+        crc2.clearRect(0, 0, canvas.width, 50);
         crc2.fillStyle = "black";
         crc2.font = "bold 16px Arial";
-        crc2.fillText("Your Earnings:", 20, 40)
-    }; 
+        crc2.fillText("Your Earnings: " + currentEarnings.toFixed(2) + " €", 20, 40);
+      }
 
     // Hintergrundfarbe zeichnen
     function drawBackground(crc2: CanvasRenderingContext2D): void {

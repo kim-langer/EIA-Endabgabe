@@ -106,11 +106,13 @@ var finaltask01;
             this.showOrderButton();
         }
         ordericecream() {
-            // Wähle eine zufällige Eissorte
+            // Zufällige Eissorte wählen
             if (finaltask01.eissorten.length > 0) {
                 let generateOrder = Math.floor(Math.random() * finaltask01.eissorten.length);
                 let chosenIceCream = finaltask01.eissorten[generateOrder];
                 this.order = chosenIceCream;
+                // Preis der Eissorte als zu zahlenden Preis speichern
+                this.pricetopay = chosenIceCream.preis;
             }
         }
         showOrderButton() {
@@ -140,6 +142,7 @@ var finaltask01;
         <p>Price: ${this.order.preis.toFixed(2)} €</p>
         <br>
         ${selectHTML}
+        <br>
         <button id="chooseicecreambutton">Create the ice cream</button>
       `;
             fulfillOrderContainer.innerHTML = orderHTML;
@@ -156,11 +159,11 @@ var finaltask01;
             completeOrderButton.id = "completeorderbutton";
             completeOrderButton.innerText = "Complete Order";
             completeOrderButton.addEventListener("click", () => {
-                fulfillOrderContainer.innerHTML = ""; // Div leeren, um es zu schließen
-                // Timer für 10 Sekunden, bevor der "Receipt" Button angezeigt wird
+                fulfillOrderContainer.remove();
+                // Timer für 8 Sekunden, bevor der "Receipt" Button angezeigt wird (quasi die Zeit, in der das Eis gegessen wird)
                 setTimeout(() => {
                     this.showReceiptButton();
-                }, 10000);
+                }, 8000);
             });
             fulfillOrderContainer.appendChild(completeOrderButton);
         }
@@ -177,27 +180,26 @@ var finaltask01;
             fulfillOrderContainer.appendChild(iceballCanvas);
         }
         showReceiptButton() {
-            // Erzeuge den "Receipt" Button
             let receiptButton = document.createElement("button");
-            receiptButton.innerText = "Receipt";
+            receiptButton.innerText = "Accept payment";
             receiptButton.id = "receipt-button";
-            receiptButton.style.display = "none"; // Starte mit ausgeblendeten Button
             receiptButton.addEventListener("click", () => {
                 this.confirmPayment();
             });
             document.body.appendChild(receiptButton);
             this.receiptButton = receiptButton;
-            // Zeige den Button nach 10 Sekunden an
-            //setTimeout(() => {
-            // this.receiptButton.style.display = "block";
-            //}, 10000);
         }
         confirmPayment() {
+            if (this.pricetopay) {
+                // Annahme: this.pricetopay enthält den Preis der Bestellung
+                let earnings = finaltask01.getCurrentEarnings(); // Funktion, um den aktuellen Einnahmebetrag abzurufen
+                earnings += this.pricetopay;
+                finaltask01.updateCurrentEarnings(earnings); // Funktion, um den aktualisierten Einnahmebetrag zu speichern
+            }
             if (this.receiptButton) {
                 this.receiptButton.remove();
                 this.receiptButton = null;
                 this.paymentConfirmed = true;
-                // Erhöhe die Einnahmen...
             }
         }
     }
