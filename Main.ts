@@ -16,8 +16,8 @@ namespace finaltask01 {
 
     export let crc2: CanvasRenderingContext2D;
     export let canvas: HTMLCanvasElement;
-    export let backgroundCanvas: HTMLCanvasElement;
     export let backgroundContext: CanvasRenderingContext2D;
+    export let backgroundCanvas: HTMLCanvasElement;
     let editbutton: HTMLButtonElement;
     let startbutton: HTMLButtonElement;
 
@@ -25,6 +25,7 @@ namespace finaltask01 {
 
         canvas = document.querySelector('canvas#front');
         crc2 = canvas.getContext('2d');
+
         // Hintergrund mit statischen Zeichnungen auf ein anderes Canvas speichern
         backgroundCanvas = document.querySelector('canvas#back');
         backgroundCanvas.width = canvas.width;
@@ -58,11 +59,30 @@ namespace finaltask01 {
         if (eissorten.length === 0) {
           showAlert();
         } else {
-          let newVisitor = new Visitor(565, 62, 0, 0);
-          newVisitor.drawvisitor();
-          newVisitor.createButton();
+          let createNewVisitor = (): void => {
+            let newVisitor = new Visitor(565, 62, 0);
+            newVisitor.mood = MoodVisitor.Happy; 
+            newVisitor.drawvisitor();
+            newVisitor.createButton();
+      
+            // Nach 15 Sekunden Stimmung zu Neutral ändern
+            setTimeout(() => {
+              newVisitor.mood = MoodVisitor.Neutral;
+              newVisitor.drawvisitor();
+            }, 15000);
+      
+            // Nach 20 Sekunden Stimmung zu Angry ändern
+            setTimeout(() => {
+              newVisitor.mood = MoodVisitor.Angry; 
+              newVisitor.drawvisitor();
+            }, 20000);
+          };
+          createNewVisitor();
+      
+          setInterval(createNewVisitor, 30000);
         }
       }
+      
       
 
     // Der "Add a new Ice Cream Button"
@@ -177,8 +197,8 @@ namespace finaltask01 {
     function drawEarnings(): void {
         crc2.fillStyle = "black";
         crc2.font = "bold 16px Arial";
-        crc2.fillText("Your Earnings:", 20, 40); // Position des Textes anpassen --> + earnings.toFixed(2) + " €", 10, 20)
-    }
+        crc2.fillText("Your Earnings:", 20, 40)
+    }; 
 
     // Hintergrundfarbe zeichnen
     function drawBackground(crc2: CanvasRenderingContext2D): void {

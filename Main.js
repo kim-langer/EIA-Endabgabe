@@ -42,9 +42,24 @@ var finaltask01;
             showAlert();
         }
         else {
-            let newVisitor = new finaltask01.Visitor(565, 62, 0, 0);
-            newVisitor.drawvisitor();
-            newVisitor.createButton();
+            let createNewVisitor = () => {
+                let newVisitor = new finaltask01.Visitor(565, 62, 0);
+                newVisitor.mood = finaltask01.MoodVisitor.Happy;
+                newVisitor.drawvisitor();
+                newVisitor.createButton();
+                // Nach 15 Sekunden Stimmung zu Neutral ändern
+                setTimeout(() => {
+                    newVisitor.mood = finaltask01.MoodVisitor.Neutral;
+                    newVisitor.drawvisitor();
+                }, 15000);
+                // Nach 20 Sekunden Stimmung zu Angry ändern
+                setTimeout(() => {
+                    newVisitor.mood = finaltask01.MoodVisitor.Angry;
+                    newVisitor.drawvisitor();
+                }, 20000);
+            };
+            createNewVisitor();
+            setInterval(createNewVisitor, 30000);
         }
     }
     // Der "Add a new Ice Cream Button"
@@ -136,8 +151,9 @@ var finaltask01;
     function drawEarnings() {
         finaltask01.crc2.fillStyle = "black";
         finaltask01.crc2.font = "bold 16px Arial";
-        finaltask01.crc2.fillText("Your Earnings:", 20, 40); // Position des Textes anpassen --> + earnings.toFixed(2) + " €", 10, 20)
+        finaltask01.crc2.fillText("Your Earnings:", 20, 40);
     }
+    ;
     // Hintergrundfarbe zeichnen
     function drawBackground(crc2) {
         crc2.fillStyle = "#E8DCCA";

@@ -38,7 +38,7 @@ canvas {
 
 #edit-container {
     position: absolute;
-    left: 30%;
+    left: 500px;
     top: 30%;
     transform: translate(-50%, -50%);
     background-color: rgb(255, 255, 255);
@@ -104,18 +104,18 @@ top: 230;
  }
 
 #vieworderbutton {
-    position: absolute;
-    background-color: #FF6384; /* Hintergrundfarbe */
-    color: #FFFFFF; /* Textfarbe */
+    position: relative;
+    background-color: #FF6384; 
+    color: #FFFFFF;
     border: none;
-    padding: 10px 20px; /* Innenabstand */
-    font-size: 16px; /* Schriftgröße */
-    border-radius: 5px; /* Abrundung der Ecken */
+    padding: 10px 20px; 
+    font-size: 16px; 
+    border-radius: 5px; 
     cursor: pointer;
   }
   
   #vieworderbutton:hover {
-    background-color: #FF478A; /* Hintergrundfarbe beim Hover-Zustand */
+    background-color: #FF478A;
   }
   
   #fulfillorder-container {
@@ -183,5 +183,18 @@ top: 230;
     position: absolute; /* Positionierung des Canvas */
     width: 500px;
     height: 500px;
+    z-index: 1;
+  }
+
+  #chooseicecreambutton {
+    position: relative;
+    z-index: 2;
+
+  }
+
+  #completeorderbutton {
+position: relative;
+    z-index: 2;
+
   }
   
