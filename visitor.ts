@@ -180,8 +180,8 @@ namespace finaltask01 {
           <p class="order-text">Please create this ice cream</p>
           <br> 
           <p>The customer wants <i>${this.order.name}</i> Ice Cream</p>
+          <p>with <i>${this.extraorder.name}</i> as Topping</p>
           <p>Price: ${this.order.preis.toFixed(2)} €</p>
-          <br>
           <label for="eissorten-input">Select Ice Cream:</label>
           ${iceCreamSelectHTML}
           <br>
@@ -193,13 +193,15 @@ namespace finaltask01 {
     
       fulfillOrderContainer.innerHTML = orderHTML;
     
-      let iceCream = new IceCream(this.order.name, this.order.preis, this.order.color);
-      iceCream.drawwaffle();
+      let  selectediceCream = new IceCream(this.order.name, this.order.preis, this.order.color);
+      let selectedtopping = new Topping(this.extraorder.name, this.extraorder.preis, this.extraorder.color);
+      selectediceCream.drawwaffle();
     
       // Button zum Erstellen der Eiscremes
       let chooseIceCreamButton = document.getElementById("chooseicecreambutton");
       chooseIceCreamButton.addEventListener("click", () => {
-        iceCream.drawflavour();
+        selectediceCream.drawflavour();
+        selectedtopping.drawtopping();
       });
       fulfillOrderContainer.appendChild(chooseIceCreamButton);
     
@@ -209,6 +211,25 @@ namespace finaltask01 {
       completeOrderButton.innerText = "Complete Order";
       completeOrderButton.addEventListener("click", () => {
         fulfillOrderContainer.classList.remove("visible");
+        // Überprüfe die ausgewählten Werte im Select-Menü
+        let selectedIceCreamInput = document.getElementById("eissorten-input") as HTMLSelectElement;
+        let selectedToppingInput = document.getElementById("toppings-input") as HTMLSelectElement;
+      
+        let selectedIceCreamName = selectedIceCreamInput.value;
+        let selectedToppingName = selectedToppingInput.value;
+      
+        if (selectedIceCreamName === this.order.name && selectedToppingName === this.extraorder.name) {
+          //  Mood um +1 erhöhen
+          if (this.mood < MoodVisitor.Angry) {
+            this.mood++;
+          }
+        } else {
+          //  Mood um -1 verringern
+          if (this.mood > MoodVisitor.Happy) {
+            this.mood--;
+          }
+        }
+      
         // Timer für 8 Sekunden, bevor der "Receipt" Button angezeigt wird (quasi die Zeit, in der das Eis gegessen wird)
         setTimeout(() => {
           this.showReceiptButton();

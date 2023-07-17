@@ -57,16 +57,17 @@ namespace finaltask01 {
         super(name, preis, color);
   }
 
-  drawtopping():void  {  let waffleCanvas = document.getElementById("waffle-canvas") as HTMLCanvasElement;
+  drawtopping():void  {  
+    let waffleCanvas = document.getElementById("waffle-canvas") as HTMLCanvasElement;
   let context = waffleCanvas.getContext("2d");
 
-  let xOffset = 155; // Abstand zum linken Rand
-  let yOffset = 65; // Abstand zum oberen Rand
+  let xOffset = 146; // Abstand zum linken Rand
+  let yOffset = 40; // Abstand zum oberen Rand
 
   context.beginPath();
-  context.moveTo(xOffset, yOffset + 40); // Startpunkt unten links
-  context.lineTo(xOffset + 20, yOffset); // Linie nach oben mittig
-  context.lineTo(xOffset + 40, yOffset + 40); // Linie nach unten rechts
+  context.moveTo(xOffset, yOffset + 20); // Startpunkt unten links
+  context.lineTo(xOffset + 5, yOffset); 
+  context.lineTo(xOffset + 20, yOffset + 20);
   context.closePath();
 
   context.fillStyle = this.color;
