@@ -19,6 +19,7 @@ var finaltask01;
             this.x = x;
             this.y = y;
         }
+        static waitingVisitors = 0;
         drawvisitor() {
             finaltask01.crc2.save();
             finaltask01.crc2.translate(this.x, this.y);
@@ -82,6 +83,8 @@ var finaltask01;
                 let crc2 = canvas.getContext('2d');
                 this.getToTable();
                 assignbutton.style.display = "none";
+                Visitor.waitingVisitors++;
+                this.updateWaitingVisitorsDisplay();
             });
             document.body.appendChild(assignbutton);
         }
@@ -92,19 +95,23 @@ var finaltask01;
                 { x: 450, y: 95 },
                 { x: 285, y: 300 }
             ];
-            // Wähle einen zufälligen Platz aus
             let randomIndex = Math.floor(Math.random() * tableoptions.length);
             let chosenPlace = tableoptions[randomIndex];
             finaltask01.crc2.clearRect(this.x + 530, this.y + 30, 70, 70);
             this.mood = MoodVisitor.Happy;
-            // Aktualisiere die Koordinaten des Besuchers und zeichne ihn an den neuen Platz
+            // Neue Koordinaten vom Visitor
             this.x = chosenPlace.x;
             this.y = chosenPlace.y;
             this.drawvisitor();
-            // Erstelle automatisch eine Bestellung
+            Visitor.waitingVisitors--;
+            this.updateWaitingVisitorsDisplay();
+            // Bestellung genereiern
             this.ordericecream();
-            // Zeige den Bestell-Button an der Position des Besuchers
             this.showOrderButton();
+        }
+        updateWaitingVisitorsDisplay() {
+            let waitingVisitorsContainer = document.getElementById("waiting-visitors-container");
+            waitingVisitorsContainer.innerText = `Waiting Visitors: ${Visitor.waitingVisitors}`;
         }
         ordericecream() {
             // Zufällige Eissorte wählen
@@ -179,7 +186,7 @@ var finaltask01;
             completeOrderButton.innerText = "Complete Order";
             completeOrderButton.addEventListener("click", () => {
                 fulfillOrderContainer.classList.remove("visible");
-                // Überprüfe die ausgewählten Werte im Select-Menü
+                // Überprüfung, ob die richtige Bestellung kreiert wurde
                 let selectedIceCreamInput = document.getElementById("eissorten-input");
                 let selectedToppingInput = document.getElementById("toppings-input");
                 let selectedIceCreamName = selectedIceCreamInput.value;
@@ -188,12 +195,14 @@ var finaltask01;
                     //  Mood um +1 erhöhen
                     if (this.mood < MoodVisitor.Angry) {
                         this.mood++;
+                        this.drawvisitor();
                     }
                 }
                 else {
                     //  Mood um -1 verringern
                     if (this.mood > MoodVisitor.Happy) {
                         this.mood--;
+                        this.drawvisitor();
                     }
                 }
                 // Timer für 8 Sekunden, bevor der "Receipt" Button angezeigt wird (quasi die Zeit, in der das Eis gegessen wird)
@@ -215,17 +224,16 @@ var finaltask01;
         }
         confirmPayment() {
             if (this.pricetopay) {
-                // Annahme: this.pricetopay enthält den Preis der Bestellung
-                let earnings = finaltask01.getCurrentEarnings(); // Funktion, um den aktuellen Einnahmebetrag abzurufen
+                let earnings = finaltask01.getCurrentEarnings();
                 earnings += this.pricetopay;
-                finaltask01.updateCurrentEarnings(earnings); // Funktion, um den aktualisierten Einnahmebetrag zu speichern
-            }
-            if (this.receiptButton) {
-                this.receiptButton.remove();
-                this.receiptButton = null;
-                this.paymentConfirmed = true;
-                finaltask01.crc2.clearRect(this.x + 30, this.y + 30, 70, 70);
-                console.log("Costumer payed and left");
+                finaltask01.updateCurrentEarnings(earnings);
+                if (this.receiptButton) {
+                    this.receiptButton.remove();
+                    this.receiptButton = null;
+                    this.paymentConfirmed = true;
+                    finaltask01.crc2.clearRect(this.x + 30, this.y + 30, 70, 70);
+                    console.log("Costumer payed and left");
+                }
             }
         }
     }

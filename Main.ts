@@ -1,8 +1,9 @@
 /*Aufgabe: Abschlussarbeit Eisdealer
 Name: Kim Langer
 Matrikelnummer: 272232
-Quellen: 
-Anmerkungen: 
+letzte Änderung: 18.07.2023
+Quellen: W3Schools, ChatGPT, bisherige EIA2 Aufgaben
+Anmerkungen: keine Zusammenarbeit(en)
 
 */
 namespace finaltask01 {
@@ -51,12 +52,12 @@ namespace finaltask01 {
 
     // Hinweis auf fehlende Eissorten
     function showAlert(): void {
-        alert("Please fill the ice cream counter before you start the game!");
+        alert("Please fill the ice cream counter before you start the game! You need at least 1 flavour and 1 topping");
       }
       
     // Eisgame starten 
     function startgame(): void {
-        if (eissorten.length === 0) {
+        if (eissorten.length === 0 || toppings.length === 0) {
           showAlert();
         } else {
           let createNewVisitor = (): void => {
@@ -75,18 +76,16 @@ namespace finaltask01 {
             setTimeout(() => {
               newVisitor.mood = MoodVisitor.Angry; 
               newVisitor.drawvisitor();
+          
             }, 20000);
 
           };
 
-          
           createNewVisitor();
       
           setInterval(createNewVisitor, 30000);
         }
       }
-      
-      
 
     // Der "Add a new Ice Cream Button"
     function createEditButton(): void {
@@ -185,7 +184,6 @@ namespace finaltask01 {
         console.log(toppings);
     }    
 
-
     // Button zum Spiel starten
     function createStartButton(): void {
         startbutton = document.createElement("button");
@@ -207,7 +205,7 @@ namespace finaltask01 {
         drawEarnings();
       }      
 
-    // Funktionen für das Berechnen und Anzeigen der Einnahmen
+    // Funktion für das Berechnen und Anzeigen der Einnahmen
     export function drawEarnings(): void {
         crc2.clearRect(0, 0, canvas.width, 50);
         crc2.fillStyle = "black";

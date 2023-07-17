@@ -169,7 +169,7 @@ canvas {
 }
 
 #waffle-canvas {
-    position: absolute; /* Positionierung des Canvas */
+    position: absolute; 
     width: 800px;
     height: 400px;
     z-index: 1;
@@ -228,4 +228,13 @@ canvas {
 #creationinput {
     position: relative;
     z-index: 2;
+}
+
+#waiting-visitors-container {
+    position: absolute;
+    top: 210px;
+    left: 1075px;
+    z-index: 1;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
 }

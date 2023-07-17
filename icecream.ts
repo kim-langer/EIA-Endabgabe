@@ -15,18 +15,18 @@ namespace finaltask01 {
       let context = wafflecanvas.getContext("2d");
       wafflecanvas.id = "waffle-canvas";
     
-      // Zeichne die Waffel auf dem Canvas
-      let xOffset = 135; // Abstand zum linken Rand
-      let yOffset = 80; // Abstand zum oberen Rand
-      let waffleWidth =45; // Breite der Waffel
-      let waffleHeight = 50; // Höhe der Waffel
+
+      let xOffset = 135; 
+      let yOffset = 80; 
+      let waffleWidth =45; 
+      let waffleHeight = 50; 
     
       context.beginPath();
       context.moveTo(xOffset + waffleWidth / 2, yOffset + waffleHeight);
       context.lineTo(xOffset, yOffset);
       context.lineTo(xOffset + waffleWidth, yOffset);
       context.closePath();
-      context.fillStyle = "#d2a86c"; // Farbe der Waffel
+      context.fillStyle = "#d2a86c"; 
       context.fill();
 
       let fulfillOrderContainer = document.getElementById("fulfillorder-container") as HTMLDivElement;
@@ -34,12 +34,12 @@ namespace finaltask01 {
     };
 
     drawflavour():void  {
-        // Eiskugel in ausgewählter Farbe zeichnen
+
         let iceballCanvas = document.getElementById("waffle-canvas") as HTMLCanvasElement;
         let context = iceballCanvas.getContext("2d");
         let ballRadius = 20;
-        let xOffset = 157; // Abstand zum linken Rand
-        let yOffset = 70; // Abstand zum oberen Rand
+        let xOffset = 157; 
+        let yOffset = 70; 
       
         context.beginPath();
         context.arc(xOffset, yOffset, ballRadius, 0, 2 * Math.PI);
@@ -61,11 +61,11 @@ namespace finaltask01 {
     let waffleCanvas = document.getElementById("waffle-canvas") as HTMLCanvasElement;
   let context = waffleCanvas.getContext("2d");
 
-  let xOffset = 146; // Abstand zum linken Rand
-  let yOffset = 40; // Abstand zum oberen Rand
+  let xOffset = 146; 
+  let yOffset = 40; 
 
   context.beginPath();
-  context.moveTo(xOffset, yOffset + 20); // Startpunkt unten links
+  context.moveTo(xOffset, yOffset + 20); 
   context.lineTo(xOffset + 5, yOffset); 
   context.lineTo(xOffset + 20, yOffset + 20);
   context.closePath();

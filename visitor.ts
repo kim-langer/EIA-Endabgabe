@@ -22,6 +22,8 @@ namespace finaltask01 {
       this.y = y;
     }
 
+    static waitingVisitors: number = 0;
+
     drawvisitor(): void {
       crc2.save();
       crc2.translate(this.x, this.y);
@@ -92,6 +94,8 @@ namespace finaltask01 {
         let crc2 = canvas.getContext('2d');
         this.getToTable();
         assignbutton.style.display = "none";
+        Visitor.waitingVisitors++;
+        this.updateWaitingVisitorsDisplay();
 
       });
       document.body.appendChild(assignbutton);
@@ -104,23 +108,29 @@ namespace finaltask01 {
         { x: 450, y: 95 },
         { x: 285, y: 300 }
       ];
-      // Wähle einen zufälligen Platz aus
       let randomIndex = Math.floor(Math.random() * tableoptions.length);
       let chosenPlace = tableoptions[randomIndex];
 
       crc2.clearRect(this.x + 530, this.y + 30, 70, 70);
     
       this.mood = MoodVisitor.Happy;
-      // Aktualisiere die Koordinaten des Besuchers und zeichne ihn an den neuen Platz
+      // Neue Koordinaten vom Visitor
       this.x = chosenPlace.x;
       this.y = chosenPlace.y;
       this.drawvisitor();
 
-      // Erstelle automatisch eine Bestellung
-      this.ordericecream();
+      Visitor.waitingVisitors--;
+      this.updateWaitingVisitorsDisplay();
 
-      // Zeige den Bestell-Button an der Position des Besuchers
+      // Bestellung genereiern
+      this.ordericecream();
       this.showOrderButton();
+    }
+
+    updateWaitingVisitorsDisplay(): void {
+      let waitingVisitorsContainer = document.getElementById("waiting-visitors-container");
+        waitingVisitorsContainer.innerText = `Waiting Visitors: ${Visitor.waitingVisitors}`;
+      
     }
 
     ordericecream(): void {
@@ -211,7 +221,8 @@ namespace finaltask01 {
       completeOrderButton.innerText = "Complete Order";
       completeOrderButton.addEventListener("click", () => {
         fulfillOrderContainer.classList.remove("visible");
-        // Überprüfe die ausgewählten Werte im Select-Menü
+
+        // Überprüfung, ob die richtige Bestellung kreiert wurde
         let selectedIceCreamInput = document.getElementById("eissorten-input") as HTMLSelectElement;
         let selectedToppingInput = document.getElementById("toppings-input") as HTMLSelectElement;
       
@@ -222,11 +233,13 @@ namespace finaltask01 {
           //  Mood um +1 erhöhen
           if (this.mood < MoodVisitor.Angry) {
             this.mood++;
+            this.drawvisitor();
           }
         } else {
           //  Mood um -1 verringern
           if (this.mood > MoodVisitor.Happy) {
             this.mood--;
+            this.drawvisitor();
           }
         }
       
@@ -253,11 +266,10 @@ namespace finaltask01 {
   
     confirmPayment(): void {
       if (this.pricetopay) {
-        // Annahme: this.pricetopay enthält den Preis der Bestellung
-        let earnings = getCurrentEarnings(); // Funktion, um den aktuellen Einnahmebetrag abzurufen
+       
+        let earnings = getCurrentEarnings(); 
         earnings += this.pricetopay;
-        updateCurrentEarnings(earnings); // Funktion, um den aktualisierten Einnahmebetrag zu speichern
-      }
+        updateCurrentEarnings(earnings); 
       
       if (this.receiptButton) {
         this.receiptButton.remove();
@@ -267,8 +279,6 @@ namespace finaltask01 {
 
         console.log("Costumer payed and left")
       }
-    
-
        }
 
-} }
+} } }
