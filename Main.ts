@@ -76,7 +76,10 @@ namespace finaltask01 {
               newVisitor.mood = MoodVisitor.Angry; 
               newVisitor.drawvisitor();
             }, 20000);
+
           };
+
+          
           createNewVisitor();
       
           setInterval(createNewVisitor, 30000);

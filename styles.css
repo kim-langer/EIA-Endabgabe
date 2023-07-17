@@ -170,8 +170,8 @@ canvas {
 
 #waffle-canvas {
     position: absolute; /* Positionierung des Canvas */
-    width: 500px;
-    height: 500px;
+    width: 800px;
+    height: 400px;
     z-index: 1;
 }
 

@@ -12,6 +12,7 @@ namespace finaltask01 {
     mood: MoodVisitor;
     pricetopay: number;
     order: IceCream | null;
+    extraorder: IceCream | null;
     receiptButton: HTMLButtonElement | null;
     paymentConfirmed: boolean;
 
@@ -107,7 +108,7 @@ namespace finaltask01 {
       let randomIndex = Math.floor(Math.random() * tableoptions.length);
       let chosenPlace = tableoptions[randomIndex];
 
-      crc2.clearRect(this.x - 35, this.y - 35, 70, 70);
+      crc2.clearRect(this.x + 530, this.y + 30, 70, 70);
     
       this.mood = MoodVisitor.Happy;
       // Aktualisiere die Koordinaten des Besuchers und zeichne ihn an den neuen Platz
@@ -123,16 +124,25 @@ namespace finaltask01 {
     }
 
     ordericecream(): void {
-
       // Zufällige Eissorte wählen
       if (eissorten.length > 0) {
-        let generateOrder = Math.floor(Math.random() * eissorten.length);
-        let chosenIceCream = eissorten[generateOrder];
+        let generateIceCream = Math.floor(Math.random() * eissorten.length);
+        let chosenIceCream = eissorten[generateIceCream];
         this.order = chosenIceCream;
-         // Preis der Eissorte als zu zahlenden Preis speichern
-        this.pricetopay = chosenIceCream.preis
+       
+        this.pricetopay = chosenIceCream.preis;
+    
+        // Zufälliges Topping wählen
+        if (toppings.length > 0) {
+          let generateTopping = Math.floor(Math.random() * toppings.length);
+          let chosenTopping = toppings[generateTopping];
+          this.extraorder = chosenTopping;
+         
+          this.pricetopay += chosenTopping.preis;
+        }
       }
-    }
+    }    
+    
 
     showOrderButton(): void {
       let vieworderbutton = document.createElement("button");
@@ -169,7 +179,7 @@ namespace finaltask01 {
         <div id="creationinput">
           <p class="order-text">Please create this ice cream</p>
           <br> 
-          <p>${this.order.name}</p>
+          <p>The customer wants <i>${this.order.name}</i> Ice Cream</p>
           <p>Price: ${this.order.preis.toFixed(2)} €</p>
           <br>
           <label for="eissorten-input">Select Ice Cream:</label>
@@ -189,7 +199,7 @@ namespace finaltask01 {
       // Button zum Erstellen der Eiscremes
       let chooseIceCreamButton = document.getElementById("chooseicecreambutton");
       chooseIceCreamButton.addEventListener("click", () => {
-        this.drawiceball();
+        iceCream.drawflavour();
       });
       fulfillOrderContainer.appendChild(chooseIceCreamButton);
     
@@ -206,24 +216,7 @@ namespace finaltask01 {
       });
       fulfillOrderContainer.appendChild(completeOrderButton);
     }
-    
-    
-    drawiceball(): void {
-      // Eiskugel in ausgewählter Farbe zeichnen
-      let iceballCanvas = document.getElementById("waffle-canvas") as HTMLCanvasElement;
-      let context = iceballCanvas.getContext("2d");
-      let ballRadius = 30;
-      let xOffset = 230; // Abstand zum linken Rand
-      let yOffset = 50; // Abstand zum oberen Rand
-    
-      context.beginPath();
-      context.arc(this.x + xOffset, this.y + yOffset, ballRadius, 0, 2 * Math.PI);
-      context.fillStyle = this.order.color;
-      context.fill();
-    
-      let fulfillOrderContainer = document.getElementById("fulfillorder-container") as HTMLDivElement;
-      fulfillOrderContainer.appendChild(iceballCanvas);
-    }    
+
 
     showReceiptButton(): void {
       let receiptButton = document.createElement("button");
@@ -249,6 +242,7 @@ namespace finaltask01 {
         this.receiptButton.remove();
         this.receiptButton = null;
         this.paymentConfirmed = true;
+        crc2.clearRect(this.x + 530, this.y + 30, 70, 70);
 
         console.log("Costumer payed and left")
       }
