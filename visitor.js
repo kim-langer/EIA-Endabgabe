@@ -126,8 +126,8 @@ var finaltask01;
             let vieworderbutton = document.createElement("button");
             vieworderbutton.innerText = "View Order";
             vieworderbutton.id = "vieworderbutton";
-            vieworderbutton.style.left = `${this.x}`;
-            vieworderbutton.style.top = `${this.y}`;
+            vieworderbutton.style.left = `${this.x}px`;
+            vieworderbutton.style.top = `${this.y}px`;
             vieworderbutton.addEventListener("click", () => {
                 this.showandfulfillOrder();
                 vieworderbutton.remove();
@@ -205,7 +205,7 @@ var finaltask01;
                 this.receiptButton.remove();
                 this.receiptButton = null;
                 this.paymentConfirmed = true;
-                finaltask01.crc2.clearRect(this.x + 530, this.y + 30, 70, 70);
+                finaltask01.crc2.clearRect(this.x + 30, this.y + 30, 70, 70);
                 console.log("Costumer payed and left");
             }
         }

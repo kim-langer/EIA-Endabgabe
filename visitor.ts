@@ -148,8 +148,8 @@ namespace finaltask01 {
       let vieworderbutton = document.createElement("button");
       vieworderbutton.innerText = "View Order";
       vieworderbutton.id = "vieworderbutton";
-      vieworderbutton.style.left = `${this.x}`;
-      vieworderbutton.style.top = `${this.y}`;
+      vieworderbutton.style.left = `${this.x}px`;
+      vieworderbutton.style.top = `${this.y}px`;
 
       vieworderbutton.addEventListener("click", () => {
         this.showandfulfillOrder();
@@ -242,7 +242,7 @@ namespace finaltask01 {
         this.receiptButton.remove();
         this.receiptButton = null;
         this.paymentConfirmed = true;
-        crc2.clearRect(this.x + 530, this.y + 30, 70, 70);
+        crc2.clearRect(this.x + 30, this.y + 30, 70, 70);
 
         console.log("Costumer payed and left")
       }
