@@ -77,7 +77,7 @@ namespace finaltask01 {
               newVisitor.mood = MoodVisitor.Angry; 
               newVisitor.drawvisitor();
           
-            }, 20000);
+            }, 25000);
 
           };
 
@@ -86,6 +86,7 @@ namespace finaltask01 {
           setInterval(createNewVisitor, 30000);
         }
       }
+
 
     // Der "Add a new Ice Cream Button"
     function createEditButton(): void {
@@ -200,8 +201,8 @@ namespace finaltask01 {
    export function getCurrentEarnings(): number {
         return currentEarnings;
       }
-    export function updateCurrentEarnings(earnings: number): void {
-        currentEarnings += earnings;
+    export function updateCurrentEarnings(_earnings: number): void {
+        currentEarnings += _earnings;
         drawEarnings();
       }      
 

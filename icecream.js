@@ -4,10 +4,10 @@ var finaltask01;
         name;
         preis;
         color;
-        constructor(name, preis, color) {
-            this.name = name;
-            this.preis = preis;
-            this.color = color;
+        constructor(_name, _preis, _color) {
+            this.name = _name;
+            this.preis = _preis;
+            this.color = _color;
         }
         drawwaffle() {
             let wafflecanvas = document.createElement("canvas");
@@ -45,8 +45,8 @@ var finaltask01;
     }
     finaltask01.IceCream = IceCream;
     class Topping extends IceCream {
-        constructor(name, preis, color) {
-            super(name, preis, color);
+        constructor(_name, _preis, _color) {
+            super(_name, _preis, _color);
         }
         drawtopping() {
             let waffleCanvas = document.getElementById("waffle-canvas");

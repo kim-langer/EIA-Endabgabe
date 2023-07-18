@@ -15,15 +15,15 @@ var finaltask01;
         extraorder;
         receiptButton;
         paymentConfirmed;
-        constructor(x, y, pricetopay) {
-            this.x = x;
-            this.y = y;
+        constructor(_x, _y, _pricetopay) {
+            this.x = _x;
+            this.y = _y;
         }
         static waitingVisitors = 0;
         drawvisitor() {
             finaltask01.crc2.save();
             finaltask01.crc2.translate(this.x, this.y);
-            // Kopf zeichnen
+            // Kopf 
             finaltask01.crc2.beginPath();
             finaltask01.crc2.arc(this.x, this.y, 30, 0, 2 * Math.PI);
             // Farbe basierend auf dem Mood
@@ -41,7 +41,7 @@ var finaltask01;
             finaltask01.crc2.lineWidth = 1;
             finaltask01.crc2.stroke();
             finaltask01.crc2.closePath();
-            // Zeichne die Augen
+            // Augen
             finaltask01.crc2.beginPath();
             finaltask01.crc2.arc(this.x - 30 / 3, this.y - 30 / 6, 30 / 8, 0, 2 * Math.PI);
             finaltask01.crc2.fillStyle = "black";
@@ -52,7 +52,7 @@ var finaltask01;
             finaltask01.crc2.fillStyle = "black";
             finaltask01.crc2.fill();
             finaltask01.crc2.closePath();
-            // Zeichne den Mund basierend auf dem Mood
+            // Mund basierend auf dem Mood
             finaltask01.crc2.beginPath();
             if (this.mood === MoodVisitor.Neutral) {
                 // Neutral
@@ -78,13 +78,13 @@ var finaltask01;
             let assignbutton = document.createElement("button");
             assignbutton.innerText = "assign a place";
             assignbutton.id = "assign-button";
+            Visitor.waitingVisitors++;
+            this.updateWaitingVisitorsDisplay();
             assignbutton.addEventListener("click", () => {
                 let canvas = document.querySelector('canvas#front');
                 let crc2 = canvas.getContext('2d');
                 this.getToTable();
                 assignbutton.style.display = "none";
-                Visitor.waitingVisitors++;
-                this.updateWaitingVisitorsDisplay();
             });
             document.body.appendChild(assignbutton);
         }
@@ -99,11 +99,11 @@ var finaltask01;
             let chosenPlace = tableoptions[randomIndex];
             finaltask01.crc2.clearRect(this.x + 530, this.y + 30, 70, 70);
             this.mood = MoodVisitor.Happy;
+            Visitor.waitingVisitors--;
             // Neue Koordinaten vom Visitor
             this.x = chosenPlace.x;
             this.y = chosenPlace.y;
             this.drawvisitor();
-            Visitor.waitingVisitors--;
             this.updateWaitingVisitorsDisplay();
             // Bestellung genereiern
             this.ordericecream();
@@ -133,8 +133,8 @@ var finaltask01;
             let vieworderbutton = document.createElement("button");
             vieworderbutton.innerText = "View Order";
             vieworderbutton.id = "vieworderbutton";
-            vieworderbutton.style.left = `${this.x}px`;
-            vieworderbutton.style.top = `${this.y}px`;
+            vieworderbutton.style.left = `${this.x + 300}px`;
+            vieworderbutton.style.top = `${this.y + 250}px`;
             vieworderbutton.addEventListener("click", () => {
                 this.showandfulfillOrder();
                 vieworderbutton.remove();
@@ -193,17 +193,13 @@ var finaltask01;
                 let selectedToppingName = selectedToppingInput.value;
                 if (selectedIceCreamName === this.order.name && selectedToppingName === this.extraorder.name) {
                     //  Mood um +1 erhöhen
-                    if (this.mood < MoodVisitor.Angry) {
-                        this.mood++;
-                        this.drawvisitor();
-                    }
+                    this.mood;
+                    this.drawvisitor();
                 }
                 else {
                     //  Mood um -1 verringern
-                    if (this.mood > MoodVisitor.Happy) {
-                        this.mood--;
-                        this.drawvisitor();
-                    }
+                    this.mood++;
+                    this.drawvisitor();
                 }
                 // Timer für 8 Sekunden, bevor der "Receipt" Button angezeigt wird (quasi die Zeit, in der das Eis gegessen wird)
                 setTimeout(() => {
@@ -216,6 +212,8 @@ var finaltask01;
             let receiptButton = document.createElement("button");
             receiptButton.innerText = "Accept payment";
             receiptButton.id = "receipt-button";
+            receiptButton.style.left = `${this.x + 280}px`;
+            receiptButton.style.top = `${this.y + 250}px`;
             receiptButton.addEventListener("click", () => {
                 this.confirmPayment();
             });
@@ -223,6 +221,9 @@ var finaltask01;
             this.receiptButton = receiptButton;
         }
         confirmPayment() {
+            const canvas = document.querySelector('canvas#front');
+            const context = canvas.getContext('2d');
+            context.clearRect(this.x, this.y, 100, 100);
             if (this.pricetopay) {
                 let earnings = finaltask01.getCurrentEarnings();
                 earnings += this.pricetopay;
@@ -231,7 +232,6 @@ var finaltask01;
                     this.receiptButton.remove();
                     this.receiptButton = null;
                     this.paymentConfirmed = true;
-                    finaltask01.crc2.clearRect(this.x + 30, this.y + 30, 70, 70);
                     console.log("Costumer payed and left");
                 }
             }

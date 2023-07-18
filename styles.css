@@ -103,7 +103,7 @@ canvas {
 }
 
 #vieworderbutton {
-    position: absolute;
+    position: relative;
     background-color: #ff6384;
     color: #ffffff;
     border: none;
@@ -211,7 +211,7 @@ canvas {
 }
 
 #receipt-button {
-    position: relative;
+    position: absolute;
     background-color: #5f6b73;
     color: #ffffff;
     border: none;
@@ -219,6 +219,7 @@ canvas {
     font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
+    z-index: 2;
 }
 
 #receipt-button:hover {

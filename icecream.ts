@@ -5,17 +5,16 @@ namespace finaltask01 {
     preis: number;
     color: string;
   
-    constructor(name: string, preis: number, color:string) {
-      this.name = name;
-      this.preis = preis;
-      this.color = color;
+    constructor(_name: string, _preis: number, _color:string) {
+      this.name = _name;
+      this.preis = _preis;
+      this.color = _color;
     }
     drawwaffle():void  {
       let wafflecanvas = document.createElement("canvas");
       let context = wafflecanvas.getContext("2d");
       wafflecanvas.id = "waffle-canvas";
-    
-
+  
       let xOffset = 135; 
       let yOffset = 80; 
       let waffleWidth =45; 
@@ -53,8 +52,8 @@ namespace finaltask01 {
   }
 
   export class Topping extends IceCream {
-    constructor(name: string, preis: number, color: string) {
-        super(name, preis, color);
+    constructor(_name: string, _preis: number, _color: string) {
+        super(_name, _preis, _color);
   }
 
   drawtopping():void  {  

@@ -57,7 +57,7 @@ var finaltask01;
                 setTimeout(() => {
                     newVisitor.mood = finaltask01.MoodVisitor.Angry;
                     newVisitor.drawvisitor();
-                }, 20000);
+                }, 25000);
             };
             createNewVisitor();
             setInterval(createNewVisitor, 30000);
@@ -154,8 +154,8 @@ var finaltask01;
         return finaltask01.currentEarnings;
     }
     finaltask01.getCurrentEarnings = getCurrentEarnings;
-    function updateCurrentEarnings(earnings) {
-        finaltask01.currentEarnings += earnings;
+    function updateCurrentEarnings(_earnings) {
+        finaltask01.currentEarnings += _earnings;
         drawEarnings();
     }
     finaltask01.updateCurrentEarnings = updateCurrentEarnings;
